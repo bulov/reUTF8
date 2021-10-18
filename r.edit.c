@@ -1250,7 +1250,7 @@ int line, col;
     struct workspace *oldwksp;
     char *linebuf;
     int nc, i, j;
-    linebuf = salloc(buf->ncolumns);
+    linebuf = salloc(nc=buf->ncolumns);
     oldwksp = curwksp;
     for (i=0;i<buf->nrows;i++)
     {
@@ -1260,7 +1260,7 @@ int line, col;
         for (j=0;j<nc;j++) linebuf[j] = cline[j];
         curwksp = oldwksp;
 	getlineFlerov(line+i);
-        putbks(col,nc);
+	putbks(col,nc);
         for (j=0;j<nc;j++) cline[col+j] = linebuf[j];
         fcline = 1;
         putline(0);
