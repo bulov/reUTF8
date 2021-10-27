@@ -1,0 +1,10 @@
+:
+d=`date +%D`
+[ ! -r version ] && echo 0 > version
+touch version
+v=`cat version`
+v=`expr $v + 1`
+echo '#include "r.defs.h"'               > Vers.c
+echo "#define VERS \"Red 4.2($v $d)\" " >> Vers.c
+echo 'char *getvers() { return(VERS);}' >> Vers.c
+echo $v > version
