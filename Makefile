@@ -37,8 +37,8 @@ LOCAL=L.locl.h
 OBJ=$(OBJS) $(OBJC)
 
 DSTDIR=/usr/local
-DSTBIN=${Z_BIN}
-DSTDIR=${Z_LIB}
+DSTBIN=/usr/local/bin
+DSTDIR=/usr/local/lib
 DSTCPU=x8
 DSTNAME=re.lin
 DSTNAME=r8
@@ -47,6 +47,7 @@ CFLD=-fwritable-strings
 CFLD=-g -fwritable-strings
 CFLD=-O -fwritable-strings
 CFLD=-g -Wno-write-strings   -Wwrite-strings
+CFLD=-ggdb3 -O0 -rdynamic
 CFLD=-g
 #CFLAGS=-g  -Wno-write-strings  -Wno-return-type -Wdeprecated-writable-strings
 #CFLAGS=-g  -Wno-write-strings  -Wno-return-type -Wdeprecated-writable-strings
@@ -198,7 +199,7 @@ $(OBJEQ) $(OBJEE):E.qsdefs.h  /usr/include/sgtty.h
 $(OBJEC): E.7920.h E.r7920.h
 
 edit: Makefile $(OBJ) Vers.o r.init.W
-	cc -o edit $(LDFLAGS) $(OBJ) Vers.o -ltermcap
+	cc -o edit $(LDFLAGS) $(OBJ) Vers.o -fvisibility=hidden /usr/lib64/libncurses.so.6 /usr/lib64/libtinfo.so.6
 Vers.o: $(OBJ)  Newvers
 	bash  -f Newvers
 	cc $(CFLAGS) -c Vers.c
