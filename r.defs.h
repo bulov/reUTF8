@@ -93,6 +93,8 @@
  */
 
 #define UTF8_D0(a) ( ( (0xd1 == ((int)(a)&0377) ) || ((int)(a)&0377) == 0xd0 ))
+
+
 #ifdef MAIN
 #define EXTERN
 #else
@@ -639,7 +641,7 @@ EXTERN int slowsw;   /* is 1 if slow speed terminal */
 EXTERN int lcasef, latf, flgtabs; /* terminal regim flags */
 EXTERN int kioutf; /* Не 0 если 15IE0013  с непереключенной клавиатурой*/
 #ifdef UTF8
-EXTERN int RcyflagUTF;
+EXTERN int RcyflagUTF8;
 #endif             /* bvg */
 #ifdef RED_CYRILL
 EXTERN int Rcyflag;

@@ -244,7 +244,29 @@ int nl, newf;
     close(newf);
     return tlines;
 }
+/* editfileLineCol(file,line,col)
+/* разобрать строку file[:line[:col]]
+/* на file line col
+*/
 
+editfileLineCol(file,line,col)
+char *file;
+int *line, *col;
+{
+   char *pf;
+   int key=0;
+
+   for  ( pf=file ; *pf != 0; pf++) {
+       if ( ':' == *pf ){
+	   *pf = 0;
+	    pf = s2i(pf+1,line);
+	    if ( 0 != *line ) *line -= 1;
+	    if ( NULL == pf )  break;
+	    s2i(pf+1,col);
+	    break;
+       }
+   }
+}
 /*
  * editfile(file,line,col,mkflg,puflg) -
  * Открыть файл file для редактирования, начиная со строки
@@ -264,6 +286,7 @@ int line, col, mkflg, puflg;
     register char *c,*d;
     int lread1;
     int linecursor;
+    editfileLineCol(file,&line,&col);
     /* Сбросим все изменения */
     putline(1);
     fn = -1;
@@ -369,11 +392,11 @@ int line, col, mkflg, puflg;
 	line = 0;
     }
     curwksp->ulhclno = line;
-    curwksp->ulhccno = col;
+//    curwksp->ulhccno = col;       // for file:line:col
     if (puflg)
     {
 	out_lines(0,-1);
-	poscursor(0,linecursor);
+	poscursor(col?col-1:0,linecursor);     // for file:line:col
     }
     return(1);
 }

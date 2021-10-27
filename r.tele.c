@@ -117,7 +117,7 @@ int c0,cf;
     int lin,alin;          /* Текущая строка - отн. и абс. номера */
     int fc, lc;       /* Первая и последняя колонки в строке (были) */
     char lmc,rmargflg;
-    int uc,ucUTF8;           /* Номер начальной колонки в окне */
+    int uc,iUTF8;           /* Номер начальной колонки в окне */
     register char *cp;/* Указатель на строкy */
     char *ce;         /* Указ. на конец строки */
     if ( zoomflag && curport != &zoomport ) return;
@@ -141,11 +141,10 @@ int c0,cf;
         }
         if (rmargflg != 0) rmargflg = RMCH;
         /* Установим начало и конец строки для выдачи */
-//        ucUTF8 = uc ? tUTF8(uc+c0):0;
-	ucUTF8 = tUTF8(uc+c0);
-	cp = cline + uc + c0 + ucUTF8;
-	if ( uc + cf + ucUTF8 + 1 < ncline-1 )
-	    ce = cline + uc + cf + ucUTF8 + 1;
+	iUTF8 = tUTF8(uc+c0);
+	cp = cline + uc + c0 + iUTF8;
+	if ( uc + cf + iUTF8 + 1 < ncline-1 )
+	    ce = cline + uc + cf + iUTF8 + 1;
 	 else
 	     ce = cline + (ncline-1);
         /* А теперь прочитаем для скорости fc, lc */
@@ -179,11 +178,11 @@ int c0,cf;
             if ( i == 0 )
 		 poscursor(col,lin), setatr(A_NORM);
             i = 0;
-	    cp -= UTF8_D0(*(cp-1))?1:0;
+	    cp -= fUTF8((cp-1))?1:0;
             while( cp < ce )
             {
 	       if ( NEWLINE == *cp ){ break; }        //UTF8
-	       if ( UTF8_D0(*cp) ){ ce++ ; i-- ; }    //UTF8
+	       if ( fUTF8(cp) ){ ce++ ; i-- ; }    //UTF8
 	       putcha(*cp++);
 	       i++;
             }
@@ -500,9 +499,9 @@ fixcurs()
     return (0);
 }
 int pUTF8(char* paramv,int pn) {
-   int n,i,j;
-   for (n=i=j=0; i < pn ; i++)
-       if ( UTF8_D0(paramv[i]) && ! UTF8_D0(paramv[i+1]))  n++;
+   int n,i;
+   for (n=i=0; i < pn ; i++)
+       if ( fUTF8(paramv+i))  i++, n++;
    return (n);
 }
 /*
@@ -530,7 +529,7 @@ int macro;
     int lread1;
     struct viewport *w;
     int chr;
-    int pnUTF8;
+    int iUTF8;
     if (paraml != 0 && paramv != 0) free(paramv);
     paraml = 0;
     paramc1 = paramc0 = cursorcol;
@@ -578,7 +577,7 @@ loop:
             c2 = cp;
             for (i=0; i<paraml; ++i) *c1++ = *c2++;
             if (paraml) free(cp);
-            paraml += LPARAM;
+	    paraml += LPARAM;
         }
         /* Конец ввода параметра */
 	if ((!macro && ISACMD(lread1) && lread1 != CCCTRLQUOTE )|| lread1==CCBACKSPACE || lread1==CCQUIT)
@@ -590,9 +589,9 @@ loop:
                 {
                     goto loop;
                 }
-		if ( pnUTF8 = pUTF8(paramv,pn) ) {
-		   poscursor(4+pn-pnUTF8,0);
-		   if ( UTF8_D0(paramv[pn-1])) --pn;
+		if ( iUTF8 = pUTF8(paramv,pn) ) {
+		   poscursor(4+pn-iUTF8,0);
+		   if ( fUTF8(paramv+(pn-2))) --pn;
 		}else{
 		   movecursor(LT);
 		}
@@ -811,7 +810,7 @@ int ml;
         *so =0;
         s=putbuf;
     }
-    while (*s && cursorcol < ml  ) UTF8_D0(*s)?cursorcol--:0 , putch( ( latf? *s++ &0177 : *s++ ),tellatr);
+    while (*s && cursorcol < ml  ) fUTF8(s)?cursorcol--:0 , putch( ( latf? *s++ &0177 : *s++ ),tellatr);
 }
 
 #ifndef DEMOSES

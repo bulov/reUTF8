@@ -115,6 +115,9 @@
  *      red [ОПЦИИ] файл [номер строки]
  *
  *      либо
+ *      red [ОПЦИИ] файл[:номер строки][:номер колонки]
+ *
+ *      либо
  *      red [ОПЦИИ] -R
  *      (повтор сеанса)
  *      либо
@@ -219,7 +222,7 @@ char **args;
 	    break;
 	case '?':
 	    printf("Using:\n");
-	    printf("%s [options] [files] - call editor\n%s - call with old state\n%s -R - repeat edition after system crash\n",arg0,arg0,arg0);
+	    printf("%s [options] [files] or [file][:line][:row] - call editor\n%s - call with old state\n%s -R - repeat edition after system crash\n",arg0,arg0,arg0);
 	    printf("options:\n");
 	    printf("       -f - no read init file\n");
 	    printf("       -i path - change init_file_path to path\n");

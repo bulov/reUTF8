@@ -235,7 +235,7 @@ mainloop()
 	 * могут прийти из макро.
 	 */
 #ifdef UTF8
-	if ( UTF8_D0(lread1) ) {  RcyflagUTF = lread1;  goto contin;  } //UTF8
+	if ( UTF8_D0(lread1) ) {  RcyflagUTF8 = lread1;  goto contin;  } //UTF8
 #endif
 	if (! ISACMD(lread1) )
 	{

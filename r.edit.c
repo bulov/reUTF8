@@ -979,25 +979,26 @@ int line, col, number, nl;
 splitline(line,col)
 int line,col;
 {
-    register int nsave;
+    register int nsave,colUTF8;
     register char csave;
     if (line >= nlines[curfile]) return;
     nlines[curfile]++;
     getlineFlerov(line);
-    if (col >= ncline - 1) openlines(line+1,1);
+    colUTF8 = tUTF8(col);
+    if (col + colUTF8  >= ncline - 1) openlines(line+1,1);
     else
     {
-        csave = cline[col];
-        cline[col] = NEWLINE;
+	csave = cline[col+colUTF8];
+	cline[col+colUTF8] = NEWLINE;
         nsave = ncline;
-        ncline = col+1;
+	ncline = col+colUTF8+1;
         fcline = 1;
 	putline(1);
-        cline[col] = csave;
-        insert(curwksp,writemp(cline+col,nsave-col),line+1);
+	cline[col+colUTF8] = csave;
+	insert(curwksp,writemp(cline+col+colUTF8,nsave-col+colUTF8),line+1);
 	redisplay((struct workspace *)NULL,curfile,line,line+1,1,line+1);
     }
-    poscursor(col - curwksp->ulhccno, line - curwksp->ulhclno);
+    poscursor(col  - curwksp->ulhccno, line - curwksp->ulhclno);
     return;
 }
 
@@ -1046,17 +1047,18 @@ combineline(line,col)
 int line,col;
 {
     register char *temp;
-    register int nsave,i;
+    register int nsave,i,colUTF8;
     if (nlines[curfile] <= line-2) nlines[curfile]--;
     getlineFlerov(line+1);
     temp = salloc(ncline);
     for (i=0;i<ncline;i++) temp[i] = cline[i];
     nsave = ncline;
     getlineFlerov(line);
-    if (col+nsave > lcline) excline(col+nsave);
-    for (i=ncline-1;i<col;i++) cline[i] = ' ';
-    for (i=0;i<nsave;i++) cline[col+i] = temp[i];
-    ncline = col + nsave;
+    colUTF8 = tUTF8(col);
+    if (col+colUTF8+nsave > lcline) excline(col+colUTF8+nsave);
+    for (i=ncline-1;i<col+colUTF8;i++) cline[i] = ' ';
+    for (i=0;i<nsave;i++) cline[col+colUTF8+i] = temp[i];
+    ncline = col+colUTF8 + nsave;
     fcline = 1;
     putline(1);
     free((char *)temp);
@@ -1109,15 +1111,16 @@ int line, col, number, nl, flg;
     char *linebuf, *bp;
     register int i;
     int j, n,line0,line1;
+    int iUTF8, colUTF8, numberUTF8;
     putline(1);
     if (charsfi == tempfile) charsfi = 0;
-    linebuf = salloc(number+1);
+    linebuf = salloc(2*number+1);    //UTF8 2* D0xx
     f0=f2=0; 
     line1 = (line0=line) + nl;
     while( nl = (line1 - line0))
     {
         if(nl > FSDMAXL) nl=FSDMAXL;
-        f1 = (struct fsd *)salloc(SFSD+(number>127?nl*2:nl));
+	f1 = (struct fsd *)salloc(SFSD+(2*number>127?nl*2:nl));  //UTF8 2* D0xx
         if(f2) {
             f2->fwdptr = f1; 
             f1->backptr = f2;
@@ -1131,19 +1134,23 @@ int line, col, number, nl, flg;
         for (j=line0;j<line0+nl;j++)
         {
 	    getlineFlerov(j);
-            if (col+number >= ncline)
+	    colUTF8 = tUTF8(col);
+	    numberUTF8 = wUTF8(number,col);
+	    if (col+number+colUTF8+numberUTF8 >= ncline)
             {
-                if (col+number >= lcline) excline(col+number+1);
-                for (i=ncline-1;i<col+number;i++) cline[i] = ' ';
-                cline[col+number] = NEWLINE;
-                ncline = col + number + 1;
+		if (col+number+colUTF8+numberUTF8 >= lcline) excline(col+number+colUTF8+numberUTF8+1);
+		for (i=ncline-1;i<col+number+colUTF8+numberUTF8;i++) cline[i] = ' ';
+		cline[col+number+colUTF8+numberUTF8] = NEWLINE;
+		ncline = col + number+colUTF8+numberUTF8+ 1;
             }
-            for (i=0;i<number;i++) linebuf[i] = cline[col+i];
-            linebuf[number] = NEWLINE;
+	    if ( 0 != colUTF8 ) colUTF8 -= fUTF8(&cline[col+colUTF8-1])?1:0;
+	    for (i=iUTF8=0;i<number+iUTF8;i++) { linebuf[i] = cline[col+colUTF8+i]; if ( fUTF8(&cline[col+colUTF8+i] )) iUTF8++ ; }
+	    if ( UTF8_D0(linebuf[i-1]) ) i--;
+	    linebuf[i] = NEWLINE;
             seek(tempfile,tempfh,3);
             seek(tempfile,tempfl,1);
             if (charsfi == tempfile) charsfi = 0;
-            write(tempfile,linebuf,n = dechars(linebuf,number));
+	    write(tempfile,linebuf,n = dechars(linebuf,i));     //UTF8 n i
             if ( n > 127 ) *bp++ = (n/128)|0200;
             *bp++ = n%128;
             tempfl += n;
@@ -1164,9 +1171,10 @@ int line, col, number, nl, flg;
             cline[col+number] = NEWLINE;
             ncline = col + number + 1;
         }
-        for (i=col+number;i<ncline;i++)
-            cline[i-number] = cline[i];
-        ncline -= number;
+	iUTF8   = wUTF8(number,col);
+	for (i=col+number+tUTF8(col+number);i<ncline;i++)
+	    cline[i-(number+iUTF8)] = cline[i];
+	ncline -= number+iUTF8;
         fcline = 1;
 	putline(1);
         if((i=j - curwksp->ulhclno) <= curport->btext)
@@ -1250,18 +1258,25 @@ int line, col;
     struct workspace *oldwksp;
     char *linebuf;
     int nc, i, j;
-    linebuf = salloc(nc=buf->ncolumns);
+    int colUTF8,nclineUTF8;
+    linebuf = salloc(nc=2*buf->ncolumns);     // UTF8 2* d0xx
     oldwksp = curwksp;
     for (i=0;i<buf->nrows;i++)
     {
         curwksp = pickwksp;
 	getlineFlerov(buf->linenum + i);
-        if (ncline-1 < nc) for (j=ncline-1;j<nc;j++) cline[j] = ' ';
-        for (j=0;j<nc;j++) linebuf[j] = cline[j];
+//        if (ncline-1 < nc) for (j=ncline-1;j<nc;j++) cline[j] = ' ';
+	if (ncline < nc) for (j=ncline;j<nc;j++) cline[j] = ' ';
+	for (j=0; j<ncline-1 ;j++) linebuf[j] = cline[j];
+//        for (j=0;j<nc;j++) linebuf[j] = cline[j];
         curwksp = oldwksp;
+	nclineUTF8=ncline-1;
 	getlineFlerov(line+i);
-	putbks(col,nc);
-        for (j=0;j<nc;j++) cline[col+j] = linebuf[j];
+	colUTF8 = tUTF8(col);
+	putbks(col+colUTF8,nclineUTF8);
+//        putbks(col,nc);
+//        for (j=0;j<nc;j++) cline[col+j] = linebuf[j];
+	for (j=0;j<nclineUTF8 ;j++) cline[col+colUTF8+j] = linebuf[j];
         fcline = 1;
         putline(0);
         if ((j = line+i-curwksp->ulhclno) <= curport->btext)

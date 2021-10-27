@@ -155,7 +155,6 @@ int ln,col,slin,lkey;
             curwksp->ulhclno = 0;
         }
     }
-//    colUTF8 = tUTF8(col);
     colUTF8 = gUTF8(col+curwksp->ulhccno);
     col -= ( curwksp->ulhccno + colUTF8 );
     if (col < 0 || col > curport->rtext)

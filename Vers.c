@@ -1,3 +1,3 @@
 #include "r.defs.h"
-#define VERS "Red 4.2(964 10/18/21)" 
+#define VERS "Red 4.2(1053 10/27/21)" 
 char *getvers() { return(VERS);}

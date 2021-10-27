@@ -9,7 +9,6 @@
 #include "r.defs.h"
 #include <stdio.h>
 
-       int thiscolUTF8;  // русские буквы с учетом позиции курсора
 extern int csrsw;  /* 1 - показать текущую позицию меткой  */
 extern int imodesw;/* 1 - режим вставки  */
 extern rep_count;
@@ -152,26 +151,33 @@ int lin, col;
 	if ( ko == 0 ) return(0);
 	else return(*ss);
 }
+// Проверка на Russian UTF8 символ
+int fUTF8( char *a ){
+   return  ( (0xd0 == (*(a)&0xd0))  && (0x80 == (*(a+1)&0xC0)) ) ? 1:0;
+}
+// Сколько Russian UTF8 символов в строке до позиции thiscol  на экране
 int tUTF8(int thiscol){
    int n,i,j;
    for (n=i=j=0; i < thiscol+j && NEWLINE != cline[i] ; i++)
-       if ( UTF8_D0(cline[i]) && ! UTF8_D0(cline[i+1]))  n++ , j++;
+       if ( fUTF8(&cline[i]) ) i++ ,n++ , j++;
    return (n);
 }
 
+// Сколько Russian UTF8 символов в строке до позиции thiscol в файле
 int gUTF8(int thiscol){
    int n,i;
    for (n=i=0; i < thiscol && NEWLINE != cline[i] ; i++)
-       if ( UTF8_D0(cline[i]) && ! UTF8_D0(cline[i+1]))  n++;
+       if ( fUTF8(&cline[i]) ) i++, n++;
    return (n);
 }
 
+// Сколько Russian UTF8 символов в строке до позиции thiscol  в окне  экрана
 int wUTF8(int thiscol,int ulhccno){
    int n=0,i,j;
    ulhccno += tUTF8(ulhccno);
    j=ulhccno+thiscol;
    for (i=ulhccno ; i < j; i++)
-       if ( UTF8_D0(cline[i]))  n++ , j++;
+       if ( fUTF8(&cline[i]) ) i++, n++ , j++;
    return (n);
 }
 
@@ -617,9 +623,9 @@ register lr1;
 	int thiscol, thisrow,j;
 	int old;
 	int first_p = 0;
-	int iUTF;
+	int iUTF8, thiscolUTF8;  // русские буквы с учетом позиции курсора
 
-	iUTF=RcyflagUTF?1:0;
+	iUTF8=RcyflagUTF8?1:0;
 	if (openwrite[curfile] == 0) goto nowriterr;
 repop:
 	/* Отмена в 1 колонке */
@@ -652,12 +658,12 @@ repop:
 			ncline = thiscol+1;
 		} else
 		{
-			if ( UTF8_D0(cline[thiscol-1]) && ! UTF8_D0(cline[thiscol]) ) iUTF=1;   // CCBACKSPACE
-			if ( UTF8_D0(cline[thiscol]) && ! UTF8_D0(cline[thiscol+1]) ) iUTF=1;   // CCDELCH
-			for (i=thiscol-iUTF;NEWLINE != cline[i+(1+iUTF)] ;i++) cline[i] = cline[i+(1+iUTF)];
+			if ( fUTF8(&cline[thiscol-1])              // CCBACKSPACE
+			  || fUTF8(&cline[thiscol  ]))  iUTF8=1;   // CCDELCH
+			for (i=thiscol-iUTF8;NEWLINE != cline[i+(1+iUTF8)] ;i++) cline[i] = cline[i+(1+iUTF8)];
 			cline[i] = NEWLINE ;
 			cline[i+1] = ' ' ;
-			ncline -= 1+iUTF;
+			ncline -= 1+iUTF8;
 		}
 		fcline = 1;
 		thiscol -= ( thiscolUTF8+curwksp->ulhccno ) ;
@@ -685,21 +691,20 @@ repop:
 	i = thiscolUTF8  + cursorcol + curwksp->ulhccno;
 	if (i >= ncline-1)
 	{
-		for (k=ncline-1; k<=i+iUTF; k++) cline[k] = ' ';
-		cline[i+1+iUTF] = NEWLINE;
-		ncline = i+2+iUTF;
+		for (k=ncline-1; k<=i+iUTF8; k++) cline[k] = ' ';
+		cline[i+1+iUTF8] = NEWLINE;
+		ncline = i+2+iUTF8;
 	}
 	else if (imodesw)
 	{
 		thiscol = thiscolUTF8 + cursorcol + curwksp->ulhccno;
 		thisrow = cursorline;
-		if (ncline >= lcline) excline(ncline+1+iUTF);   //UTF8
-		ncline += 1+iUTF;      //UTF8
-		for (i=ncline-1 ; i > thiscol ;i--) cline[i] = cline[i-(1+iUTF)];   //UTF8
+		if (ncline >= lcline) excline(ncline+1+iUTF8);
+		ncline += 1+iUTF8;
+		for (i=ncline-1 ; i > thiscol ;i--) cline[i] = cline[i-(1+iUTF8)];
 		thiscol -= ( thiscolUTF8 + curwksp->ulhccno);
-//                i -= iUTF;
-		cline[i] = RcyflagUTF;
-		cline[i+iUTF] = lr1;
+		cline[i] = RcyflagUTF8;
+		cline[i+iUTF8] = lr1;
 		out_cols((1+thiscol),-1);
 		poscursor(thiscol,thisrow);
 	}
@@ -709,8 +714,8 @@ repop:
 	/* Замена символа */
 	if(lr1==CCCTRLQUOTE) lr1 = esc0;
 	if (cursorcol == curport->rtext - 10) putcha(COBELL);
-	if ( RcyflagUTF ) { cline[i] = RcyflagUTF ; putch(RcyflagUTF,1); --cursorcol ; RcyflagUTF=0 ;} //UTF8
-	cline[i+iUTF] = lr1;
+	if ( RcyflagUTF8 ) { cline[i] = RcyflagUTF8 ; putch(RcyflagUTF8,1); --cursorcol ; RcyflagUTF8=0 ;}
+	cline[i+iUTF8] = lr1;
 	putch(lr1,1);
 	/* Если переехали границу */
 	curport->redit = curport->rtext;
