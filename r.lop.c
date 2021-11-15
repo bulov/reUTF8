@@ -683,13 +683,13 @@ repop:
 		movecursor(LT);
 		lr1 = ' ';
 	}
-	if ((i = tUTF8(cursorcol+curwksp->ulhccno) + cursorcol + curwksp->ulhccno) >= (lcline - 2)) excline(i+2);
-	thiscolUTF8 = wUTF8(cursorcol,curwksp->ulhccno);
+	thiscolUTF8 = tUTF8(cursorcol+curwksp->ulhccno);
 	i = thiscolUTF8  + cursorcol + curwksp->ulhccno;
+	if (i >= (lcline - 2) ) excline(i+2);
 	if (i >= ncline-1)
 	{
 		for (k=ncline-1; k<=i+iUTF8; k++) cline[k] = ' ';
-		cline[i+1+iUTF8] = NEWLINE;
+		cline[1+i+iUTF8] = NEWLINE;
 		ncline = i+2+iUTF8;
 	}
 	else if (imodesw)
