@@ -652,13 +652,14 @@ repop:
 			ncline = thiscol+1;
 		} else
 		{
-			int jUTF8=0;
+			int jUTF8=0,iUTF8=0;
 
 			if ( fUTF8(&cline[thiscol-1]))  jUTF8=1;   // CCBACKSPACE
 			if ( fUTF8(&cline[thiscol  ]))  iUTF8=1;   // CCDELCH
-			for (i=thiscol-jUTF8;NEWLINE != cline[i+(1+iUTF8+jUTF8)] ;i++) cline[i] = cline[i+(1+iUTF8+jUTF8)];
+			iUTF8 += jUTF8;
+			for (i=thiscol-jUTF8;NEWLINE != cline[i+(1+iUTF8)] ;i++) cline[i] = cline[i+(1+iUTF8)];
 			cline[i] = NEWLINE ;
-			cline[i+1] = ' ' ;
+			cline[i+1] = cline[i+1+iUTF8] = ' ' ;
 			ncline -= 1+iUTF8;
 		}
 		fcline = 1;
