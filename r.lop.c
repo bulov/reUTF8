@@ -151,28 +151,22 @@ int lin, col;
 	if ( ko == 0 ) return(0);
 	else return(*ss);
 }
-// Проверка на Russian UTF8 символ
-int fUTF8( char *a ){
+int fUTF8( char *a ){  // Проверка на Russian UTF8 символ
    return  ( (0xd0 == (*(a)&0xd0))  && (0x80 == (*(a+1)&0xC0)) ) ? 1:0;
 }
-// Сколько Russian UTF8 символов в строке до позиции thiscol  на экране
-int tUTF8(int thiscol){
+int tUTF8(int thiscol){    // Сколько Russian UTF8 символов в строке до позиции thiscol  на экране
    int n,i,j;
    for (n=i=j=0; i < thiscol+j && NEWLINE != cline[i] ; i++)
        if ( fUTF8(&cline[i]) ) i++ ,n++ , j++;
    return (n);
 }
-
-// Сколько Russian UTF8 символов в строке до позиции thiscol в файле
-int gUTF8(int thiscol){
+int gUTF8(int thiscol){    // Сколько Russian UTF8 символов в строке до позиции thiscol в файле
    int n,i;
    for (n=i=0; i < thiscol && NEWLINE != cline[i] ; i++)
        if ( fUTF8(&cline[i]) ) i++, n++;
    return (n);
 }
-
-// Сколько Russian UTF8 символов в строке до позиции thiscol  в окне  экрана
-int wUTF8(int thiscol,int ulhccno){
+int wUTF8(int thiscol,int ulhccno){     // Сколько Russian UTF8 символов в строке до позиции thiscol  в окне  экрана
    int n=0,i,j;
    ulhccno += tUTF8(ulhccno);
    j=ulhccno+thiscol;
@@ -658,9 +652,11 @@ repop:
 			ncline = thiscol+1;
 		} else
 		{
-			if ( fUTF8(&cline[thiscol-1])              // CCBACKSPACE
-			  || fUTF8(&cline[thiscol  ]))  iUTF8=1;   // CCDELCH
-			for (i=thiscol-iUTF8;NEWLINE != cline[i+(1+iUTF8)] ;i++) cline[i] = cline[i+(1+iUTF8)];
+			int jUTF8=0;
+
+			if ( fUTF8(&cline[thiscol-1]))  jUTF8=1;   // CCBACKSPACE
+			if ( fUTF8(&cline[thiscol  ]))  iUTF8=1;   // CCDELCH
+			for (i=thiscol-jUTF8;NEWLINE != cline[i+(1+iUTF8+jUTF8)] ;i++) cline[i] = cline[i+(1+iUTF8+jUTF8)];
 			cline[i] = NEWLINE ;
 			cline[i+1] = ' ' ;
 			ncline -= 1+iUTF8;
