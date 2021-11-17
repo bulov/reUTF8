@@ -39,9 +39,8 @@ OBJ=$(OBJS) $(OBJC)
 DSTDIR=/usr/local
 DSTBIN=/usr/local/bin
 DSTDIR=/usr/local/lib
-DSTCPU=x8
-DSTNAME=re.lin
-DSTNAME=r8
+DSTCPU=re
+DSTNAME=re
 RED=edit
 CFLD=-fwritable-strings
 CFLD=-g -fwritable-strings
@@ -221,13 +220,14 @@ E.tubecc.o: E.tubecc.s
 	as -u -o E.tubecc.o E.tubecc.s
 
 install: $(RED) edit lib.red rpl
-	-chmod a-t ${DSTBIN}/$(DSTNAME)
-	cp rpl $(DSTBIN)/rpl
-	-strip $(DSTBIN)/rpl
-	-strip $(RED)
-	cp $(RED) ${DSTBIN}/$(DSTNAME)
-	chmod 7711 ${DSTBIN}/$(DSTNAME)
-	cd lib.red;$(MAKE) DSTLIB=$(DSTDIR) install
+	-sudo chmod a-t ${DSTBIN}/$(DSTNAME)
+	 sudo cp rpl $(DSTBIN)/rpl
+	-sudo strip $(DSTBIN)/rpl
+	-sudo strip $(RED)
+	 sudo cp $(RED) ${DSTBIN}/$(DSTNAME)
+	 sudo chmod 7711 ${DSTBIN}/$(DSTNAME)
+	 cd lib.red; $(MAKE) DSTLIB=$(DSTDIR) install
+	 sudo mkdir /var/tmp/ret{m,t} ; sudo chmod 07777 /var/tmp/ret{m,t}
 
 rinstall: edit red.lib/re.std red.lib/help.* rpl
 	-rsh ${DSTCPU} chmod a-t ${DSTDIR}/bin/$(DSTNAME)
@@ -243,7 +243,7 @@ binstall:       install
 	cp $(DSTDIR)/bin/$(DSTNAME) $(DSTDIR)/bin/rpl /bin
 
 rbinstall:      rinstall
-	-rsh $(DSTCPU) mv /bin/$(DSTNAME) /bin/$(DSTNAME).old
+	-ssh $(DSTCPU) mv /bin/$(DSTNAME) /bin/$(DSTNAME).old
 	rsh $(DSTCPU) cp $(DSTDIR)/bin/$(DSTNAME) $(DSTDIR)/bin/rpl /bin
 
 clean:
