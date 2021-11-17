@@ -1,284 +1,532 @@
-ABS_COL          339 r.defs.h         #define ABS_COL(c) ((c)+curwksp->ulhccno)
-ABS_LIN          338 r.defs.h         #define ABS_LIN(l) ((l)+curwksp->ulhclno)
-ADD_MACRO        471 S.ttyio.c        #define ADD_MACRO(c) ((c != CCQUIT && c != CCDEFMACRO && M_p < M_e ) ?  (*M_p++ = c) : MacExpand(c))
-ARGS              58 r.rdf.c          # define ARGS(N) (01<<(N))
-ASSERT            53 r.mall.c         #define ASSERT(p) if(!(p))botch("p");else
-ATR              234 r.defs.h         #define ATR(x)  (((x-COANORMAL)&(017))<<8)             /* Получение атрибута */
-AddCmd           293 S.gettc.c        char *AddCmd(cmd,key)
-AddKey           255 S.gettc.c        char *AddKey(ac, av)
-B_MARG           526 r.defs.h         #define B_MARG(col) (showtabs && col < MAXTCOL && ISTAB(col) ? BMTCH : BMCH)
-C1                14 r.pars.c         # define C1(zz) (((zz>>8)&0377)&0137)
-C2                15 r.pars.c         # define C2(zz) ((zz)&0377)
-CLRBIT           514 r.defs.h         #define CLRBIT(s,i) (s[ (i) >>5] &= ~(1l<<((i)&037) ) )
-CLRTAB           522 r.defs.h         #define CLRTAB(i) CLRBIT(tabstps,i)
-CTRL             379 S.termc.c        #define CTRL(c) ('c' & 037)
-ClearKeys        233 S.gettc.c        ClearKeys(m)
-DEB              345 r.pars.c         # define DEB(s) ErrI(1,s)
-DIAG             112 r.defs.h         #define DIAG(l,r) r
-ErrI             256 r.rdf.c          ErrI(ko, s)
-Get1cmd          252 r.pars.c         # define Get1cmd(ac1, av1, ac, av) {\
-GetTC            397 S.gettc.c        GetTC(ifd,ailine)
-INTT              89 S.tele.h         #define INTT(c) ((tablecod.ct_in[(c)-040])&0377)
-ISACMD           138 r.defs.h         #define ISACMD(c)  ((c&0300) == 0200)
-ISBIT            512 r.defs.h         #define ISBIT(s,i)  (s[ (i) >>5] &  (1l<< ((i)&037) ) )
-ISCTRL            68 S.tele.h         #define ISCTRL(c) (((c)&0140) == 0 || (c)==0177)
-ISDELIM           30 r.lop.c          #define ISDELIM(i)   ISBIT(s_delims,(((int)i)&0377))
-ISMACRO          139 r.defs.h         #define ISMACRO(c)  ((c)>CCMAC && (c) <= CCEMAC)
-ISPARENT          24 r.lop.c          #define ISPARENT(i)   ISBIT(s_parents,(((int)i)&0377))
-ISTAB            520 r.defs.h         #define ISTAB(i)   ISBIT(tabstps,i)
-InitConsts       156 r.var.c          InitConsts()
-InitTabs         107 r.tabs.c         InitTabs()
-Itoa             308 r.hlam.c         char *Itoa(ii)
-K7TS              94 S.locl.h         #define K7TS(s) ((s)|0200)
-K7TS             106 D.locl.h         #define K7TS(s) ((s)|0200)
-KI40BIT           63 D.locl.h         #define KI40BIT(x) 0
-KIOFLG            56 S.locl.h         #define KIOFLG(x) (((x)&(KIRILL|IKIRILL|LCASE))==(KIRILL))
-KIOFLG            61 D.locl.h         #define KIOFLG(x) 0
-LATFLG            54 S.locl.h         #define LATFLG(x) (((x)&KIRILL)==0)
-LATFLG            59 D.locl.h         #define LATFLG(x) 1 /* пУЦТБ ВЫДАУТЦЯ КАК МОГУТ ╙╞
-LCFLG             52 S.locl.h         #define LCFLG(x) ((x)&(LCASE))
-LCFLG             57 D.locl.h         #define LCFLG(x) 0
-LOCALSET          55 D.locl.h         #define LOCALSET(l) (l|LLITOUT)
-LSCALE            12 r.tabs.c         SCALE tabstps[LSCALE(MAXTCOL)];
-LSCALE           511 r.defs.h         #define LSCALE(l) (((l)>>5)+1)
-MINIT            339 r.pars.c         # define MINIT(len) {mp = macrobuf = salloc(len);\
-MPUTC            338 r.pars.c         # define MPUTC(c,Err) if ( mp  > mep ) goto Err; else *mp++ = (c)
-MacCreate        397 r.mac.c          MacCreate(name)
-MacEnd           446 r.mac.c          MacEnd(f)
-MacExpand        420 r.mac.c          MacExpand(cmd)
-MacRestore       370 r.rdf.c          MacRestore(path)
-MacSave          330 r.rdf.c          MacSave(path,howstate)
-MacWrite         470 r.mac.c          MacWrite(fd)
-MatchTname       305 r.rdf.c          MatchTname(ac,av)
-NUMA             233 r.defs.h         #define NUMA(c) ((c>>8)&017) + COANORMAL   /* Номер атрибута */
-NewMacro         280 r.mac.c          NewMacro(name, macro)
-OUTT              88 S.tele.h         #define OUTT(c) (tablecod.ct_out[(c)&077])
-PUTP             583 r.defs.h         #define PUTP(c) put1c((char)c,ttyfile)
-Param_cmd        523 r.pars.c         Param_cmd()
-ParseCmd         264 r.pars.c         char *ParseCmd( pd, ac, av)
-REDFLG            48 S.locl.h         #define REDFLG(x) (x&(~(ECHO|CRMOD|INDCTL|XTABS|RAW))|(CBREAK))
-REDFLG            51 D.locl.h         #define REDFLG(x) (x&(~(ECHO|CRMOD|XTABS|RAW))|(CBREAK))
-REDFLGL           50 S.locl.h         #define REDFLGL(x) (x&(~(ECHO|CRMOD|INDCTL|XTABS|RAW|LCASE))|(CBREAK|KIRILL|IKIRILL)) /* См. ned.t.c -#ifndef MNOS */
-REDFLGL           53 D.locl.h         #define REDFLGL(x) (x)
-REL_COL          341 r.defs.h         #define REL_COL(c) ((c)-curwksp->ulhccno)
-REL_LIN          340 r.defs.h         #define REL_LIN(l) ((l)-curwksp->ulhclno)
-RLPRO             82 S.locl.h         #define RLPRO(x) ((unsigned)(x) >=0340 && (unsigned)(x)<=0376)
-RLPRO             94 D.locl.h         #define RLPRO(x) ((unsigned)(x) >=0340 && (unsigned)(x)<=0376)
-RLSTRO            83 S.locl.h         #define RLSTRO(x) ((unsigned)(x) >=0300 && (unsigned)(x)<=0337)
-RLSTRO            95 D.locl.h         #define RLSTRO(x) ((unsigned)(x) >=0300 && (unsigned)(x)<=0337)
-ReadInit          89 r.rdf.c          ReadInit(path,sysinit)
-ReadMFile        350 r.pars.c         char *ReadMFile(r_proc,err_proc)
-SETBIT           513 r.defs.h         #define SETBIT(s,i) (s[ (i) >>5] |= (1l<< ((i)&037) ) )
-SETDELIM          31 r.lop.c          #define SETDELIM(i) SETBIT(s_delims,(((int)i)&0377))
-SETPARENT         25 r.lop.c          #define SETPARENT(i) SETBIT(s_parents,(((int)i)&0377))
-SETTAB           521 r.defs.h         #define SETTAB(i) SETBIT(tabstps,i)
-STASCII           95 S.locl.h         #define STASCII(s) ((s)&0177)
-STASCII          107 D.locl.h         #define STASCII(s) ((s)&0177)
-STK7              93 S.locl.h         #define STK7(s) ((s)&0177|040)
-STK7             105 D.locl.h         #define STK7(s) ((s)&0177|040)
-S_IN             485 S.ttyio.c        #define S_IN(p) {if ( p && p_stekm < &b_stekm[MAXSTEK] ) *p_stekm++ = p;}
-S_OUT            486 S.ttyio.c        #define S_OUT(p) {if ( p_stekm > b_stekm ) p = *--p_stekm;else p = NULL;}
-S_next           137 r.lop.c          #define S_next(l) (++ss<=ess? (*ss) : S_setup(&l, l+1, 0))
-S_prev           138 r.lop.c          #define S_prev(l) (--ss>=bss? (*ss) : S_setup(&l, l-1,-1))
-S_setup          139 r.lop.c          static char S_setup(P_l, lin,col)
-SelectArgs       170 r.pars.c         SelectArgs(cp, execargs, maxargs)
-SetTab            30 r.tabs.c         char *SetTab( tcol, cmd)
-SetVar           228 r.var.c          SetVar ( name, av, ac)
-StateRead        467 r.rdf.c          StateRead(rline,errpt)
-StateWrite       404 r.rdf.c          StateWrite(fd,howstate)
-StrCalc          184 r.var.c          char *StrCalc(s)
-TabWrite         117 r.tabs.c         TabWrite(fd)
-VarEInit         119 r.var.c          VarEInit()
-WriteMFile       432 r.pars.c         WriteMFile(mp, fd)
-WriteSet         365 r.var.c          WriteSet(fd)
-ZZ                12 r.pars.c         # define ZZ(a,b)  ('a'&0377) << 8 | 'b'&0377 | (040<<8) | 040
-ZZ                77 S.newtc.c        # define ZZ(a,b) ('a'&0377) << 8 | 'b'&0377
-ZZS               13 r.pars.c         # define ZZS(a,b) (( a &0377) << 8 |  b &0377)  | (040<<8) | 040
-abs              144 r.hlam.c         abs(number)
-addkey           822 S.ttyio.c        addkey(cmd,key)
-allock           232 r.mall.c         allock()
-append           153 r.hlam.c         char *append(name,ext)
-blanklines      1630 r.edit.c         struct fsd *blanklines(n)
-botch             54 r.mall.c         botch(s)
-breakfsd        1350 r.edit.c         int breakfsd(w,n,reall)
-callexec         957 r.cmd.c          callexec()
-catfsd          1659 r.edit.c         catfsd(w)
-cgoto            142 r.wind.c         cgoto(ln,col,slin,lkey)
-chars            213 r.edit.c         int chars(flg)
-charsin          164 r.edit.c         charsin(fi,h,l)
-checkfsd        1911 r.edit.c         checkfsd()
-checkpriv         91 r.hlam.c         checkpriv(fildes)
-chgport          447 r.wind.c         chgport(portnum)
-cleanup          446 r.main.c         cleanup()
-clearbusy        103 r.mall.c         #define clearbusy(p) (union store *)((INT)(p)&~BUSY)
-closelines       973 r.edit.c         closelines(frum,number)
-closespaces      997 r.edit.c         closespaces(line,col,number,nl)
-combineline     1008 r.edit.c         combineline(line,col)
-compl_delims      63 r.lop.c          compl_delims()
-compl_parents     84 r.lop.c          compl_parents()
-copyfsd         1573 r.edit.c         struct fsd *copyfsd(f,end)
-dechars          585 r.edit.c         int dechars(line,n)
-defkey           316 r.mac.c          defkey()
-defmac           259 r.mac.c          defmac(name)
-delete          1289 r.edit.c         struct fsd *delete(wksp,from,to)
-do_macro         491 S.ttyio.c        do_macro(lc)
-do_select       1120 r.cmd.c          do_select()
-do_set           343 r.var.c          do_set(str)
-doreplace       1768 r.edit.c         doreplace(line,m,jproc,pipef)
-drawport         627 r.tele.c         drawport(newp,vertf)
-drop_wksp        359 r.wind.c         drop_wksp(port)
-dumpcbuf         447 S.ttyio.c        dumpcbuf()
-dumpfsd         1827 r.edit.c         dumpfsd(file)
-editfile         258 r.file.c         editfile(file,line,col,mkflg,puflg)
-editline         446 r.lop.c          static editline(ln,str,lnos)
-endit            387 r.file.c         endit()
-error            687 r.tele.c         error(msg)
-excline          739 r.edit.c         excline(n)
-execr           1818 r.edit.c         execr(args)
-exinss           310 r.edit.c         exinss(si,se,so,no,mo)
-fatal            532 r.main.c         fatal(s)
-file2fsd          73 r.edit.c         struct fsd *file2fsd(fname)
-findt            772 S.ttyio.c        findt (fb,fe,sy,ns)
-fixcurs           90 r.tele.c         #define fixcurs() /* */
-free             182 r.mall.c         free(ap)
-freefsd         1615 r.edit.c         freefsd(f)
-fsdwrite         164 r.file.c         fsdwrite(ff,nl,newf)
-get1c            236 r.hlam.c         int get1c(fd)
-get1w            228 r.hlam.c         int get1w(fd)
-get_gch          614 S.gettc.c        get_gch()
-getkeys          312 r.var.c          char *getkeys(buf0,len)
-getline         1477 r.edit.c         getline(ln)
-getnm            211 r.hlam.c         char *getnm(uid)
-getpriv          123 r.hlam.c         getpriv(fildes)
-gettcs           317 S.gettc.c        char *gettcs(tc)
-gettcs           333 S.newtc.c        char *gettcs(tc)
-gtfcn            125 r.wind.c         gtfcn(number)
-gtty             115 S.ttyio.c        #define  gtty(des,fil) ioctl(des,TCGETA,fil)
-helpview        1030 r.cmd.c          helpview()
-igsig            505 r.main.c         igsig()
-infmesg          750 r.tele.c         infmesg(msg,col,atr)
-info             782 r.tele.c         info(ss,ml)
-ini_rline        229 r.rdf.c          static char *ini_rline(buf,len)
-insert          1249 r.edit.c         insert(wksp,f,at)
-intrup           700 S.ttyio.c        intrup()
-isanychr          92 S.tele.h         #define isanychr(c) ((c)==' ' || ((c)>='0'&&(c)<='9'))
-iscyrill          91 S.tele.h         #define iscyrill(c) (((c)&0300) == 0300)
-it_compare       556 S.gettc.c        static it_compare(tp1, tp2)
-itsort           502 S.newtc.c        itsort(fb,fe,ns)
-line_cop         165 r.lop.c          line_cop(p_l,p_c,op,str)
-linecset         109 r.lop.c          linecset(op,arg)
-lineop           501 r.lop.c          lineop(lr1)
-mac_perr         296 r.rdf.c          static void mac_perr(s1,s2)
-main             181 r.main.c         main(nargs,args)
-mainloop         141 r.cmd.c          mainloop()
-makecc           103 r.pars.c         makecc (s)
-makecc           252 S.newtc.c        makecc (c)
-makecs           131 r.pars.c         char *makecs (c)
-makeport         263 r.wind.c         makeport(file)
-makestate        458 r.main.c         makestate()
-malloc           117 r.mall.c         malloc(nbytes)
-mdeftag          203 r.mac.c          mdeftag(name)
-mgotag           168 r.mac.c          mgotag(name)
-mktab            199 S.newtc.c        mktab ()
-mname             86 r.mac.c          union macro *mname(name,typ,l)
-movecursor       365 r.tele.c         movecursor(arg)
-movep            105 r.wind.c         movep(nc)
-movew             61 r.wind.c         movew(nl,fix)
-msrbuf           131 r.mac.c          msrbuf( sbuf, name,op)
-msvtag           151 r.mac.c          msvtag(name)
-new_delims        51 r.lop.c          new_delims()
-new_parents       46 r.lop.c          new_parents()
-next_path        134 r.var.c          char *next_path( pps)
-normhl          1748 r.edit.c         int normhl(ll, hh)
-openlines        908 r.edit.c         openlines(from,number)
-openspaces       922 r.edit.c         openspaces(line,col,number, nl)
-out_cols         101 r.tele.c         out_cols(c0,cf)
-out_lines        106 r.tele.c         out_lines(l0,lf)
-out_mark         243 r.tele.c         out_mark(lin,col,marka)
-out_win          111 r.tele.c         out_win(l0,lf,c0,cf)
-param            517 r.tele.c         int param(macro)
-pcspaces        1067 r.edit.c         pcspaces(line,col,number,nl,flg)
-pcursor          294 S.ttyio.c        pcursor(col,lin)
-pick            1321 r.edit.c         struct fsd *pick(wksp,from,to)
-picklines       1035 r.edit.c         picklines(from,number)
-pickspaces      1056 r.edit.c         pickspaces(line,col,number,nl)
-plines          1176 r.edit.c         plines(buf,line)
-poscursor        273 r.tele.c         poscursor(col,lin)
-printfsd        1884 r.edit.c         printfsd(f,fd)
-pspaces         1209 r.edit.c         pspaces(buf,line,col)
-pt_info          294 r.main.c         pt_info()
-ptff            1873 r.edit.c         ptff(f) struct fsd *f;
-ptfree           248 r.mall.c         ptfree(fd)
-ptl             1866 r.edit.c         ptl(wf)
-pttt             644 S.gettc.c        pttt()
-put             1163 r.edit.c         put(buf,line,col)
-put1c            251 r.hlam.c         put1c(c,fd)
-put1w            244 r.hlam.c         put1w(w,fd)
-putbks           758 r.edit.c         putbks(col,n)
-putblanks        429 S.ttyio.c        putblanks(k)
-putch            441 r.tele.c         putch(j,flg)
-putcha           326 S.ttyio.c        putcha(c)
-putchb           412 S.ttyio.c        putchb(c)
-putline         1502 r.edit.c         putline(nosave)
-read2            730 S.ttyio.c        read2()
-readch           517 S.ttyio.c        int readch()
-readfc           674 S.ttyio.c        readfc()
-realloc          204 r.mall.c         realloc(p, nbytes)
-redisplay        480 r.wind.c         redisplay(w,fn,from,to,delta,fromd)
-removeport       385 r.wind.c         removeport()
-rescreen         555 r.wind.c         rescreen(nom)int nom;
-rmacl            300 r.mac.c          char *rmacl(isy)
-run_shell        293 r.hlam.c         run_shell(cmd)
-s2i              182 r.hlam.c         char *s2i(s,i)
-salloc            75 r.hlam.c         char *salloc(n)
-savefile          61 r.file.c         savefile(file,n)
-scroll           867 S.ttyio.c        scroll(n,bl)
-search           708 r.lop.c          search(delta)
-seek             263 r.hlam.c         seek(fd,shift,dsk)
-set_param        211 r.mac.c          set_param(nfile,line,col)
-setatr           457 S.ttyio.c        setatr(atr)
-setbusy          102 r.mall.c         #define setbusy(p) (union store *)((INT)(p)|BUSY)
-setkeys          268 r.var.c          setkeys(keys)
-setscroll        968 S.ttyio.c        setscroll(viewp,begl)
-settab           169 r.tabs.c         char *settab(tabcol,arg)
-setupviewport    196 r.wind.c         setupviewport(ww,cl,cr,lt,lb,c)
-shiftview        807 r.tele.c         shiftview(n0,nl)
-sig              485 r.main.c         sig(n)
-splitline        942 r.edit.c         splitline(line,col)
-startup          304 r.main.c         static startup(f)
-strcopy          135 r.hlam.c         strcopy(a,b)
-stty             114 S.ttyio.c        #define  stty(des,fil) ioctl(des,TCSETA,fil)
-switchfile       851 r.edit.c         switchfile(dir)
-switchport       181 r.wind.c         switchport(ww)
-switchpwksp      891 r.edit.c         switchpwksp()
-switchwksp       872 r.edit.c         switchwksp(make)
-tcread           406 S.newtc.c        tcread()
-tcread           437 S.gettc.c        tcread()
-tdecode          326 S.termc.c        tdecode(str, area)
-telluser         711 r.tele.c         telluser(msg,col)
-temp2fsd          84 r.edit.c         struct fsd *temp2fsd(chan)
-test             858 S.ttyio.c        test(s) char *s;
-testbusy         101 r.mall.c         #define testbusy(p) ((INT)(p)&BUSY)
-testsig          518 r.main.c         testsig()
-tgetent           70 S.termc.c        tgetent(bp, name)
-tgetflag         276 S.termc.c        tgetflag(id)
-tgetnum          244 S.termc.c        tgetnum(id)
-tgetstr          302 S.termc.c        tgetstr(id, area)
-tgoto            413 S.termc.c        tgoto(CM, destcol, destline)
-tnamatch         200 S.termc.c        tnamatch(np)
-tnchktc          152 S.termc.c        tnchktc()
-to_home          239 r.wind.c         to_home(cp,port)
-tostop           275 r.hlam.c         tostop()
-tskip            226 S.termc.c        tskip(bp)
-ttcleanup        268 S.ttyio.c        ttcleanup()
-ttstartup        159 S.ttyio.c        ttstartup()
-undoedit        1555 r.edit.c         undoedit(f)
-unread1          662 S.ttyio.c        unread1(ch)
-unzoom           627 r.wind.c         unzoom(draw)
-werrsig          494 r.main.c         werrsig()
-word_op          326 r.lop.c          word_op(p_l, p_c, op,arg)
-wposit           817 r.edit.c         wposit(wk,lno)
-writefile        749 S.ttyio.c        writefile(code1,str,code2)
-writemp         1436 r.edit.c         struct fsd *writemp(buf,n)
-wseek            781 r.edit.c         int wseek(wksp,lno)
-zoom_w           598 r.wind.c         zoom_w(back)
+ADD              macro       322 r.var.c          #define ADD(c) if ( len <= 0 ) goto retn;else (*buf++ = c),len--;
+ADD_MACRO        macro       483 S.ttyio.c        #define ADD_MACRO(c) ((c != CCQUIT && c != CCDEFMACRO && M_p < M_e ) ? (*M_p++ = c) : MacExpand(c))
+ALIGBUF          macro       175 r.edit.c         #define ALIGBUF /* Читать по границе листа!! */
+ALIGN            macro        86 r.mall.c         #define ALIGN int
+ANYP             macro       141 S.ttyio.c        #define ANYP (ODDP|EVENP)
+ARGS             macro        58 r.rdf.c          # define ARGS(N) (01<<(N))
+ARGSA            macro        59 r.rdf.c          # define ARGSA 017777
+ASSERT           macro        53 r.mall.c         #define ASSERT(p) if(!(p))botch("p");else
+ASSERT           macro        61 r.mall.c         #define ASSERT(p)
+AddCmd           function    293 S.gettc.c        char *AddCmd(cmd,key)
+AddKey           function    255 S.gettc.c        char *AddKey(ac, av)
+BC               macro       382 S.termc.c        #undef BC
+BC               variable    384 S.termc.c        char *BC;
+BCTC             macro       386 S.termc.c        #define BCTC BC
+BLOCK            macro        90 r.mall.c         #define BLOCK (1024*4)
+BLOCK            macro        93 r.mall.c         #define BLOCK 256 /* a multiple of WORD*/
+BLOCK            macro        95 r.mall.c         #define BLOCK 1024
+BUSY             macro        98 r.mall.c         #define BUSY 1
+C1               macro        14 r.pars.c         # define C1(zz) (((zz>>8)&0377)&0137)
+C2               macro        15 r.pars.c         # define C2(zz) ((zz)&0377)
+CCDEL            macro       741 S.ttyio.c        #define CCDEL 0177
+CHARBUFSZ        macro       176 r.edit.c         #define CHARBUFSZ 512 /* >= 512, если ALIGBUF */
+CP               macro        60 r.var.c          #define CP (char **)
+CTRL             macro       378 S.termc.c        #undef CTRL
+CTRL             macro       379 S.termc.c        #define CTRL(c) ('c' & 037)
+ClearKeys        function    233 S.gettc.c        ClearKeys(m)
+DEB              macro       348 r.pars.c         # define DEB(s) ErrI(1,s)
+DEB              macro       350 r.pars.c         # define DEB(s) /* */
+DEFTABL          macro       163 S.gettc.c        # define DEFTABL 13
+END_SELECT       macro       165 r.cmd.c          #define END_SELECT() if ( sel_flag ) goto make_select;else;
+E_TERMCAP        macro        50 S.termc.c        #define E_TERMCAP "/etc/termcap"
+ErrI             function    256 r.rdf.c          ErrI(ko, s)
+Err_str          variable    134 r.cmd.c          char *Err_str; /* Текст сообщения об ошибке */
+GETSY1           macro       530 S.ttyio.c        #define GETSY1(c,g) if( read(inputfile,&c,1) != 1 || intrflag ) goto g; else
+GRANULE          macro        66 r.mall.c         #define GRANULE 64
+GRANULE          macro        68 r.mall.c         #define GRANULE 0
+G_g1             macro       631 S.gettc.c        #define G_g1 1
+G_g2             macro       632 S.gettc.c        #define G_g2 2
+Get1cmd          macro       255 r.pars.c         # define Get1cmd(ac1, av1, ac, av) {\
+GetTC            function    410 S.gettc.c        GetTC(ifd,ailine)
+HELP_PATH        macro        68 r.init.c         # define HELP_PATH "%h/.redh.%t:%h/.redh.dflt:/usr/local/lib/red/help%k.%t:/usr/local/lib/red/help%k.dflt"
+HelpPath         variable     79 r.init.c         char *HelpPath = HELP_PATH;
+HomeDir          variable     20 r.var.c          static char *UserName, *HomeDir, *TtyName,*TtyName2, *TmpDir;
+INCTABSZ         macro        85 S.gettc.c        # define INCTABSZ 150
+INIT_PATH        macro        64 r.init.c         # define INIT_PATH "/usr/local/lib/red/init.%t:%h/.redi.%t:%h/.redi.dflt:/usr/local/lib/red/init%k.%t:/usr/local/lib/red/init%k.dflt"
+INIT_RE          macro        59 r.init.c         #define INIT_RE
+INI_ATR          macro        53 r.rdf.c          # define INI_ATR 6
+INI_KEY          macro        49 r.rdf.c          # define INI_KEY 2
+INI_MACRO        macro        52 r.rdf.c          # define INI_MACRO 5
+INI_READ         macro        50 r.rdf.c          # define INI_READ 3
+INI_SET          macro        48 r.rdf.c          # define INI_SET 1
+INI_STAT         macro        55 r.rdf.c          # define INI_STAT 8
+INI_TABS         macro        54 r.rdf.c          # define INI_TABS 7
+INI_TERMCAP      macro        51 r.rdf.c          # define INI_TERMCAP 4
+INT              macro        85 r.mall.c         #define INT int
+ISDELIM          macro        29 r.lop.c          #define ISDELIM(i) ISBIT(s_delims,(((int)i)&0377))
+ISPARENT         macro        23 r.lop.c          #define ISPARENT(i) ISBIT(s_parents,(((int)i)&0377))
+I_1key           member       69 r.var.c          char I_1key; /* Однобуквенное имя, если существует */
+I_ENV            member       67 r.var.c          char *I_ENV ; /* Имя при установке из ENV */
+I_changed        member       70 r.var.c          char I_changed; /* Признак - переменная менялась */
+I_func           member       73 r.var.c          int (*I_func)(); /* Функция, которая вызывается после определения */
+I_name           member       66 r.var.c          char *I_name; /* Имя в команде set */
+I_ptr            member       72 r.var.c          char **I_ptr; /* Указатель на переменную */
+I_save           member       71 r.var.c          char I_save; /* Если 1 - запоминать в macro-файл */
+I_type           member       68 r.var.c          char I_type; /* тип */
+InitConsts       function    156 r.var.c          InitConsts()
+InitPath         variable     78 r.init.c         char *InitPath = INIT_PATH;
+InitTabs         function    107 r.tabs.c         InitTabs()
+Itoa             function    312 r.hlam.c         char *Itoa(ii)
+KeyMode          variable     82 r.init.c         char *KeyMode = "";
+LBUFWSY          macro       632 S.ttyio.c        #define LBUFWSY 5
+LKEY             macro       311 r.mac.c          #define LKEY 20 /* Макс. число символов, генерируемых новой клавишей */
+LMAC             macro        72 r.mac.c          #define LMAC ('z'-'a'+11)
+LNAME            macro       209 r.hlam.c         #define LNAME 8
+LPARAM           macro       522 r.tele.c         #define LPARAM 20 /* Длина приращения длины */
+LSpace           variable    226 S.gettc.c        static LSpace = 0; /* Длина буфера (текущего), 0 - признак НЕТ */
+LTCM             macro       308 S.gettc.c        #define LTCM 400
+Label            variable     24 r.var.c          char *Label; /* Вывеска */
+LkeySpace        variable    224 S.gettc.c        int LkeySpace = 2048; /* Величина временного буфера для кодов клавиш */
+MACRO_PATH       macro        71 r.init.c         # define MACRO_PATH "%h/.redmacro"
+MAC_EXLEN        macro       364 r.mac.c          # define MAC_EXLEN 64
+MAC_MAXL         macro       366 r.mac.c          # define MAC_MAXL 512
+MAIN             macro        57 r.init.c         #define MAIN
+MAIN1            macro        86 r.tele.c         #define MAIN1
+MAXHOP           macro        45 S.termc.c        #define MAXHOP 32 /* max number of tc= indirections */
+MAXSTEK          macro       495 S.ttyio.c        # define MAXSTEK 64
+MAX_IARGS        macro        78 r.rdf.c          # define MAX_IARGS 10
+MAX_ILINE        macro        75 r.rdf.c          # define MAX_ILINE 128
+MAX_ILINE        macro       337 r.pars.c         # define MAX_ILINE 128
+MAX_MACLEN       macro       334 r.pars.c         # define MAX_MACLEN 512
+MAX_STRLEN       macro        15 r.var.c          # define MAX_STRLEN 128
+MBUF             macro        64 r.mac.c          #define MBUF 2
+MFREE            macro       345 r.pars.c         # define MFREE if(macrobuf) {free(macrobuf);macrobuf = (char *)0;}else
+MGET             macro       344 r.pars.c         # define MGET ((*mp++ = 0),macrobuf)
+MI               macro       311 r.hlam.c         # define MI 20
+MINIT            macro       342 r.pars.c         # define MINIT(len) {mp = macrobuf = salloc(len);\
+MMAC             macro        65 r.mac.c          #define MMAC 3
+MPUTC            macro       341 r.pars.c         # define MPUTC(c,Err) if ( mp > mep ) goto Err; else *mp++ = (c)
+MSBUF            macro        68 r.mac.c          #define MSBUF SSAVEBUF
+MSMAC            macro        70 r.mac.c          #define MSMAC sizeof(char *)
+MSTAG            macro        69 r.mac.c          #define MSTAG sizeof(struct tag)
+MTAG             macro        63 r.mac.c          #define MTAG 1
+M_buf            variable    393 r.mac.c          static char *M_buf; /* Начало буфера */
+M_e              variable    395 r.mac.c          char *M_e;
+M_mac            variable    396 r.mac.c          static union macro *M_mac; /* Указатель структуры тек. макро */
+M_p              variable    394 r.mac.c          char *M_p; /* Указатели текущего буфера и его конца */
+MacCreate        function    397 r.mac.c          MacCreate(name)
+MacEnd           function    446 r.mac.c          MacEnd(f)
+MacExpand        function    420 r.mac.c          MacExpand(cmd)
+MacRestore       function    370 r.rdf.c          MacRestore(path)
+MacSave          function    330 r.rdf.c          MacSave(path,howstate)
+MacWrite         function    470 r.mac.c          MacWrite(fd)
+Mac_info         variable    294 r.mac.c          char Mac_info[3];
+MacroFile        variable     80 r.init.c         char *MacroFile= MACRO_PATH;
+MatchTname       function    305 r.rdf.c          MatchTname(ac,av)
+Mnames           variable     74 r.mac.c          static char Mnames[]="abcdefghijklmnoqprstuvwxyz0123456789";
+NALIGN           macro        87 r.mall.c         #define NALIGN 1
+NARGS            macro       959 r.cmd.c          #define NARGS 20
+NBYMAX           macro        88 r.edit.c         #define NBYMAX 150 /* Макс. размер байтов для fsdbytes, +1 */
+NEWEDIT          macro       121 r.cmd.c          #define NEWEDIT new_info = 1
+NEWEDIT          macro       127 r.cmd.c          #define NEWEDIT newedit = 1
+NOFUN            macro        63 r.var.c          #define NOFUN (int(*)())0
+NO_SELECT        macro       164 r.cmd.c          #define NO_SELECT() if ( sel_flag ) goto no_select;else
+NPUTCBUF         macro       129 S.ttyio.c        #define NPUTCBUF 256 /* Размер буфера вывода */
+NULL             macro        99 r.mall.c         #undef NULL
+NULL             macro       100 r.mall.c         #define NULL 0
+NewMacro         function    280 r.mac.c          NewMacro(name, macro)
+PIT              macro        73 S.gettc.c        # define PIT /* */
+PIT              macro        75 S.gettc.c        # define PIT pttt();
+PSpace           variable    225 S.gettc.c        static char *PkeySpace, *PSpace; /* Ук на буфер и положение в нем */
+PTab             variable    227 S.gettc.c        static struct ex_int *PTab = (struct ex_int *)0; /* УК на свободное место в таблице */
+PUTCC            macro       890 S.ttyio.c        #define PUTCC(c,n) for(i= n;i>0;i--) putcha(c)
+Param_cmd        function    526 r.pars.c         Param_cmd()
+ParseCmd         function    267 r.pars.c         char *ParseCmd( pd, ac, av)
+PkeySpace        variable    225 S.gettc.c        static char *PkeySpace, *PSpace; /* Ук на буфер и положение в нем */
+RFile            variable     77 r.init.c         char *RFile = ".,resv.%u";
+ReadInit         function     89 r.rdf.c          ReadInit(path,sysinit)
+ReadMFile        function    353 r.pars.c         char *ReadMFile(r_proc,err_proc)
+RedKeys          variable     81 r.init.c         char *RedKeys;
+SETDELIM         macro        30 r.lop.c          #define SETDELIM(i) SETBIT(s_delims,(((int)i)&0377))
+SETPARENT        macro        24 r.lop.c          #define SETPARENT(i) SETBIT(s_parents,(((int)i)&0377))
+S_IN             macro       497 S.ttyio.c        #define S_IN(p) {if ( p && p_stekm < &b_stekm[MAXSTEK] ) *p_stekm++ = p;}
+S_OUT            macro       498 S.ttyio.c        #define S_OUT(p) {if ( p_stekm > b_stekm ) p = *--p_stekm;else p = NULL;}
+S_next           macro       136 r.lop.c          #define S_next(l) (++ss<=ess? (*ss) : S_setup(&l, l+1, 0))
+S_prev           macro       137 r.lop.c          #define S_prev(l) (--ss>=bss? (*ss) : S_setup(&l, l-1,-1))
+S_setup          function    138 r.lop.c          static char S_setup(P_l, lin,col)
+SelectArgs       function    173 r.pars.c         SelectArgs(cp, execargs, maxargs)
+SetTab           function     30 r.tabs.c         char *SetTab( tcol, cmd)
+SetVar           function    228 r.var.c          SetVar ( name, av, ac)
+StateRead        function    467 r.rdf.c          StateRead(rline,errpt)
+StateWrite       function    404 r.rdf.c          StateWrite(fd,howstate)
+StrCalc          function    184 r.var.c          char *StrCalc(s)
+TBFSIZ           macro        46 S.termc.c        #define TBFSIZ TBUFSIZE
+TELE_INIT        macro        82 S.gettc.c        #define TELE_INIT
+TIOCGETC         macro       118 S.ttyio.c        #undef TIOCGETC
+TIOCSETA         macro       117 S.ttyio.c        #undef TIOCSETA
+TIOCSLTC         macro       119 S.ttyio.c        #undef TIOCSLTC
+TTYnm            variable     75 r.init.c         char *TTYnm = "%wrett%d.%u";
+TTYtmp           variable     76 r.init.c         char *TTYtmp= "%wretm%d.%u";
+TabWrite         function    117 r.tabs.c         TabWrite(fd)
+TmpDir           variable     20 r.var.c          static char *UserName, *HomeDir, *TtyName,*TtyName2, *TmpDir;
+TtyName          variable     20 r.var.c          static char *UserName, *HomeDir, *TtyName,*TtyName2, *TmpDir;
+TtyName2         variable     20 r.var.c          static char *UserName, *HomeDir, *TtyName,*TtyName2, *TmpDir;
+TtyType          variable     21 r.var.c          char *TtyType;
+UP               macro       381 S.termc.c        #undef UP
+UP               variable    383 S.termc.c        char *UP;
+UPTC             macro       385 S.termc.c        #define UPTC UP
+UserName         variable     20 r.var.c          static char *UserName, *HomeDir, *TtyName,*TtyName2, *TmpDir;
+VAR_BOOL         macro        56 r.var.c          # define VAR_BOOL 1
+VAR_NUM          macro        58 r.var.c          # define VAR_NUM 3
+VAR_STR          macro        57 r.var.c          # define VAR_STR 2
+VarEInit         function    119 r.var.c          VarEInit()
+WORD             macro        88 r.mall.c         #define WORD sizeof(union store)
+WriteMFile       function    435 r.pars.c         WriteMFile(mp, fd)
+WriteSet         function    365 r.var.c          WriteSet(fd)
+ZZ               macro        12 r.pars.c         # define ZZ(a,b) (( (a) & 0377 ) << 8 | ((b) & 0377)) | (040<<8) | 040
+ZZS              macro        13 r.pars.c         # define ZZS(a,b) (( a & 0377 ) << 8 | ( b & 0377)) | (040<<8) | 040
+abs              function    144 r.hlam.c         abs(number)
+addkey           function    839 S.ttyio.c        addkey(cmd,key)
+all_errors       variable    489 S.ttyio.c        static int all_errors = 0;
+allock           function    116 r.mall.c         allock()
+allocp           variable    111 r.mall.c         static union store *allocp; /*search ptr*/
+allocs           variable    110 r.mall.c         static union store allocs[2]; /*initial arena*/
+alloct           variable    112 r.mall.c         static union store *alloct; /*arena top*/
+allocx           variable    113 r.mall.c         static union store *allocx; /*for benefit of realloc*/
+alltabs          variable     50 r.var.c          int alltabs;
+alt_koi          variable     75 r.edit.c         char alt_koi[] = {
+append           function    153 r.hlam.c         char *append(name,ext)
+atcread          variable    310 S.gettc.c        int (*atcread)()= tcread;
+b_stekm          variable    496 S.ttyio.c        static char *b_stekm[MAXSTEK+1], **p_stekm = b_stekm;
+blanklines       function   1682 r.edit.c         struct fsd *blanklines(n)
+botch            function     54 r.mall.c         botch(s)
+breakfsd         function   1402 r.edit.c         int breakfsd(w,n,reall)
+bss              variable    128 r.lop.c          static char *ess, *ss, *bss;
+buf_grc          variable    645 S.gettc.c        static char buf_grc[G_END - G_START + 1];
+buftc            variable    409 S.gettc.c        static char *buftc;
+callexec         function    960 r.cmd.c          callexec()
+calloc           member      107 r.mall.c         int calloc; /*calloc clears an array of integers*/
+catfsd           function   1711 r.edit.c         catfsd(w)
+cgoto            function    142 r.wind.c         cgoto(ln,col,slin,lkey)
+chars            function    235 r.edit.c         int chars(flg)
+charscol         variable     87 r.edit.c         int charskh,charskl,charscol; /* Положение символа ( для chars) */
+charsfi          variable    180 r.edit.c         int charsfi,charsi,charsn;
+charsi           variable    180 r.edit.c         int charsfi,charsi,charsn;
+charsin          function    186 r.edit.c         charsin(fi,h,l)
+charskh          variable     87 r.edit.c         int charskh,charskl,charscol; /* Положение символа ( для chars) */
+charskl          variable     87 r.edit.c         int charskh,charskl,charscol; /* Положение символа ( для chars) */
+charsn           variable    180 r.edit.c         int charsfi,charsi,charsn;
+checkfsd         function   1963 r.edit.c         checkfsd()
+checkpriv        function     91 r.hlam.c         checkpriv(fildes)
+chg_flag         variable     51 r.var.c          int chg_flag; /* 0 при Init-файле, 1 далее */
+chg_tabs         variable     13 r.tabs.c         int chg_tabs;
+chgport          function    449 r.wind.c         chgport(portnum)
+chkh             variable    179 r.edit.c         int chkl,chkh; /* position of next read from charsfi */
+chkl             variable    179 r.edit.c         int chkl,chkh; /* position of next read from charsfi */
+cleanup          function    449 r.main.c         cleanup()
+clearbusy        macro       103 r.mall.c         #define clearbusy(p) (union store *)((INT)(p)&~BUSY)
+clineno          variable    105 r.init.c         int clineno = -1;
+closelines       function   1011 r.edit.c         closelines(frum,number)
+closespaces      function   1035 r.edit.c         closespaces(line,col,number,nl)
+clrsw            variable    116 r.cmd.c          int clrsw; /* 1 - чистить окно параметров */
+cmd_ac           member      245 r.pars.c         short cmd_ac; /* Число параметров */
+cmd_av           member      247 r.pars.c         char **cmd_av; /* Массив параметров */
+cmd_break        member      246 r.pars.c         short cmd_break; /* Признак - команда прерывает строку */
+cmd_cmd          member      243 r.pars.c         short cmd_cmd; /* 0 - просто текст */
+cmd_cod          member       23 r.pars.c         int cmd_cod;
+cmd_names        struct       21 r.pars.c         struct cmd_names {
+cmd_names        variable     24 r.pars.c         } cmd_names[] =
+cmd_rep          member      244 r.pars.c         short cmd_rep; /* Число повторений */
+cmd_zz           member       22 r.pars.c         int cmd_zz;
+cmdstr           struct      242 r.pars.c         struct cmdstr {
+col              member       67 r.mac.c          struct tag {int line, col, nfile;};
+combineline      function   1046 r.edit.c         combineline(line,col)
+compl_delims     function     62 r.lop.c          compl_delims()
+compl_parents    function     83 r.lop.c          compl_parents()
+copyfsd          function   1625 r.edit.c         struct fsd *copyfsd(f,end)
+csrsw            variable    117 r.cmd.c          int csrsw; /* 1 - показать текущую позицию меткой */
+ctl_expand       struct       25 r.var.c          static struct ctl_expand {
+ctl_expand       variable     28 r.var.c          } ctl_expand[] =
+curr_ifd         variable     84 r.rdf.c          FILE *curr_ifd;
+curr_ifname      variable     85 r.rdf.c          char *curr_ifname;
+curr_iline       variable     86 r.rdf.c          int curr_iline;
+curspos          variable    122 S.gettc.c        char *curspos;
+cvtout           variable     99 S.gettc.c        char *cvtout[] = {
+cy40bit          variable    152 S.ttyio.c        int cy40bit; /* Для переворота в упр. последовательностях */
+db               variable    161 r.main.c         struct savebuf pb,db;
+debug            macro        50 r.mall.c         #define debug
+dechars          function    614 r.edit.c         int dechars(line,n)
+defdelete        variable     97 r.init.c         int defdelete = 1; /* CLOSE */
+defedit          variable    100 r.init.c         int defedit = 2; /* Умолчания для границы сдвига экрана */
+deffile          variable     99 r.init.c         char *deffile /* = "/usr/local/lib/red/help.DFLT" */ ; /* Файл подсказок */
+definsert        variable     96 r.init.c         int definsert = 1; /* OPEN */
+defkey           function    316 r.mac.c          defkey()
+deflport         variable     93 r.init.c         int deflport = 30; /* LEFT PORT */
+defmac           function    259 r.mac.c          defmac(name)
+defmiline        variable     90 r.init.c         int defmiline = 10; /* -LINE */
+defmipage        variable     92 r.init.c         int defmipage = 1; /* -PAGE */
+defpick          variable     98 r.init.c         int defpick = 1; /* PICK */
+defplline        variable     89 r.init.c         int defplline = 10; /* +LINE */
+defplpage        variable     91 r.init.c         int defplpage = 1; /* +PAGE */
+defrport         variable     94 r.init.c         int defrport = 30; /* RIGHT PORT */
+deftabstep       variable     14 r.tabs.c         int deftabstep= 8; /* Умолчание для табуляции */
+delete           function   1341 r.edit.c         struct fsd *delete(wksp,from,to)
+delimiters       variable     27 r.lop.c          char *delimiters=" ~!@#$%^&*(-+=`\\\"';:.>,</?";
+dflinsert        variable    113 r.init.c         int dflinsert=4;
+do_macro         function    503 S.ttyio.c        do_macro(lc)
+do_select        function   1123 r.cmd.c          do_select()
+do_set           function    343 r.var.c          do_set(str)
+doreplace        function   1820 r.edit.c         doreplace(line,m,jproc,pipef)
+drawport         function    641 r.tele.c         drawport(newp,vertf)
+drop_wksp        function    361 r.wind.c         drop_wksp(port)
+dummy            member      106 r.mall.c         ALIGN dummy[NALIGN];
+dumpcbuf         function    459 S.ttyio.c        dumpcbuf()
+dumpfsd          function   1879 r.edit.c         dumpfsd(file)
+editfile         function    280 r.file.c         editfile(file,line,col,mkflg,puflg)
+editfileLineCol  function    252 r.file.c         editfileLineCol(file,line,col)
+editline         function    468 r.lop.c          static editline(ln,str,lnos)
+endit            function    410 r.file.c         endit()
+errkod           variable    255 r.rdf.c          static errkod = -1;
+error            function    701 r.tele.c         error(msg)
+escch1           variable    141 S.gettc.c        char escch1 = '\012';
+ess              variable    128 r.lop.c          static char *ess, *ss, *bss;
+excline          function    776 r.edit.c         excline(n)
+execr            function   1870 r.edit.c         execr(args)
+exinss           function    332 r.edit.c         exinss(si,se,so,no,mo)
+expand_c         member       27 r.var.c          char **expand_c;
+fUTF8            function    154 r.lop.c          int fUTF8( char *a ){ // Проверка на Russian UTF8 символ
+fat_sig          variable    487 r.main.c         static char fat_sig[] = "..: Fatal signal\n";
+fatal            function    535 r.main.c         fatal(s)
+fcline           variable    106 r.init.c         char fcline = 0;
+fd               variable   1878 r.edit.c         FILE *fd;
+file2fsd         function     95 r.edit.c         struct fsd *file2fsd(fname)
+findt            function    789 S.ttyio.c        findt (fb,fe,sy,ns)
+firststart       variable    157 S.ttyio.c        int firststart=1; /* 0 - не первый заход в startup */
+fixcurs          function    484 r.tele.c         fixcurs()
+fixcurs          macro        90 r.tele.c         #define fixcurs() /* */
+freefsd          function   1667 r.edit.c         freefsd(f)
+fsdwrite         function    164 r.file.c         fsdwrite(ff,nl,newf)
+fullinsert       variable     49 r.var.c          int fullinsert;
+gUTF8            function    163 r.lop.c          int gUTF8(int thiscol){ // Сколько Russian UTF8 символов в строке до позиции thiscol в файле
+get1c            function    236 r.hlam.c         int get1c(fd)
+get1w            function    228 r.hlam.c         int get1w(fd)
+get_gch          function    646 S.gettc.c        get_gch()
+getkeys          function    312 r.var.c          char *getkeys(buf0,len)
+getlineFlerov    function   1529 r.edit.c         getlineFlerov(ln)
+getnm            function    211 r.hlam.c         char *getnm(uid)
+getpriv          function    123 r.hlam.c         getpriv(fildes)
+gettcs           function    317 S.gettc.c        char *gettcs(tc)
+graf_gg          variable    633 S.gettc.c        static char *graf_gg[] =
+graphcase        variable    328 S.ttyio.c        static int graphcase = 0;
+gtfcn            function    125 r.wind.c         gtfcn(number)
+gtty             macro       115 S.ttyio.c        #define gtty(des,fil) ioctl(des,TCGETA,fil)
+gtty             macro       134 S.ttyio.c        #define gtty(des,fil) ioctl(des,TIOCGETA,fil)
+helpview         function   1033 r.cmd.c          helpview()
+hopcount         variable     57 S.termc.c        static int hopcount; /* detect infinite loops in termcap, init 0 */
+i_args           member       62 r.rdf.c          int i_args;
+i_keyw           member       61 r.rdf.c          char *i_keyw;
+i_kod            member       63 r.rdf.c          int i_kod; } ini_keys[] = {
+icline           variable    104 r.init.c         int icline = 20; /* Инкремент для расширения */
+igsig            function    508 r.main.c         igsig()
+imodesw          variable     48 r.var.c          int imodesw;
+inctab           variable    142 S.gettc.c        struct ex_int inctab[INCTABSZ] = {
+infmesg          function    764 r.tele.c         infmesg(msg,col,atr)
+info             function    796 r.tele.c         info(ss,ml)
+ini_keys         struct       60 r.rdf.c          static struct ini_keys {
+ini_keys         variable     63 r.rdf.c          int i_kod; } ini_keys[] = {
+ini_rline        function    229 r.rdf.c          static char *ini_rline(buf,len)
+inputfile        variable    110 r.init.c         int inputfile = 0;
+ins_how          variable    619 S.gettc.c        static char *ins_how[] =
+insert           function   1301 r.edit.c         insert(wksp,f,at)
+int_vars         struct       65 r.var.c          struct int_vars {
+int_vars         variable     75 r.var.c          } int_vars [] =
+intrup           function    717 S.ttyio.c        intrup()
+iputcbuf         variable    321 S.ttyio.c        int iputcbuf=0;
+is_delims        variable     28 r.lop.c          int is_delims;
+is_parents       variable     21 r.lop.c          static int is_parents;
+iscyrill         macro       391 S.ttyio.c        #define iscyrill(c) (((c)&0300) == 0300)
+isy0f            variable    685 S.ttyio.c        static int isy0f = -1;
+it_compare       function    588 S.gettc.c        static it_compare(tp1, tp2)
+koi_alt          variable     65 r.edit.c         char koi_alt[] = {
+latdiag          variable    154 S.ttyio.c        int latdiag;
+lcasef0          variable    153 S.ttyio.c        int lcasef0; /* Внутренний признак lcase для вывода */
+lcline           variable    103 r.init.c         int lcline = 0;
+left_c           member       26 r.var.c          char left_c;
+left_parents     variable     18 r.lop.c          char *left_parents ="({['`\"";
+line             member       67 r.mac.c          struct tag {int line, col, nfile;};
+line_cop         function    187 r.lop.c          line_cop(p_l,p_c,op,str)
+line_mesg        variable    107 r.lop.c          char *line_mesg;
+linecset         function    108 r.lop.c          linecset(op,arg)
+lineop           function    523 r.lop.c          lineop(lr1)
+lineop           function    612 r.lop.c          lineop(lr1)
+litchar          variable    487 S.ttyio.c        static int litchar;
+local            variable    150 S.ttyio.c        int local, localo;
+localo           variable    150 S.ttyio.c        int local, localo;
+ltc              variable    307 S.gettc.c        static int ltc;
+mac_perr         function    296 r.rdf.c          static void mac_perr(s1,s2)
+macro            union        76 r.mac.c          union macro {struct savebuf mbuf; struct tag mtag; char *mstring;}
+macrobuf         variable    339 r.pars.c         char *macrobuf, *mep;
+main             function    184 r.main.c         main(nargs,args)
+mainloop         function    141 r.cmd.c          mainloop()
+makecc           function    106 r.pars.c         makecc (s)
+makecs           function    134 r.pars.c         char *makecs (c)
+makeport         function    265 r.wind.c         makeport(file)
+makestate        function    461 r.main.c         makestate()
+mbuf             member       76 r.mac.c          union macro {struct savebuf mbuf; struct tag mtag; char *mstring;}
+mdeftag          function    203 r.mac.c          mdeftag(name)
+mep              variable    339 r.pars.c         char *macrobuf, *mep;
+mgotag           function    168 r.mac.c          mgotag(name)
+mmtaba           variable     77 r.mac.c          *mtaba[LMAC], *mmtaba[LMAC];
+mname            function     86 r.mac.c          union macro *mname(name,typ,l)
+movecursor       function    367 r.tele.c         movecursor(arg)
+movep            function    105 r.wind.c         movep(nc)
+movew            function     61 r.wind.c         movew(nl,fix)
+mp               variable    340 r.pars.c         char *mp;
+msrbuf           function    131 r.mac.c          msrbuf( sbuf, name,op)
+mstring          member       76 r.mac.c          union macro {struct savebuf mbuf; struct tag mtag; char *mstring;}
+msvtag           function    151 r.mac.c          msvtag(name)
+mtaba            variable     77 r.mac.c          *mtaba[LMAC], *mmtaba[LMAC];
+mtabt            variable     78 r.mac.c          char mtabt[LMAC];
+mtag             member       76 r.mac.c          union macro {struct savebuf mbuf; struct tag mtag; char *mstring;}
+namewd           variable    210 r.hlam.c         static char namewd[LNAME+1];
+new_delims       function     50 r.lop.c          new_delims()
+new_parents      function     45 r.lop.c          new_parents()
+next_args        variable    179 r.main.c         char **next_args;
+next_path        function    134 r.var.c          char *next_path( pps)
+nfile            member       67 r.mac.c          struct tag {int line, col, nfile;};
+nfinc            variable    303 S.gettc.c        int nfinc=8;
+normhl           function   1800 r.edit.c         int normhl(ll, hh)
+oldccol          variable    129 r.cmd.c          int oldccol; /* используется для отметки положения курсора */
+oldchar          variable    488 S.ttyio.c        static int oldchar = -1;
+oldcline         variable    130 r.cmd.c          int oldcline; /* - - / / - - */
+oldltc           variable    148 S.ttyio.c        static struct ltchars tmpltc,oldltc;
+oldttmode        variable    303 r.main.c         int oldttmode;
+openlines        function    945 r.edit.c         openlines(from,number)
+openspaces       function    959 r.edit.c         openspaces(line,col,number, nl)
+ospeed           variable    151 S.ttyio.c        int ospeed; /* Для termcap */
+out_cols         function    101 r.tele.c         out_cols(c0,cf)
+out_lines        function    106 r.tele.c         out_lines(l0,lf)
+out_mark         function    245 r.tele.c         out_mark(lin,col,marka)
+out_win          function    111 r.tele.c         out_win(l0,lf,c0,cf)
+pUTF8            function    501 r.tele.c         int pUTF8(char* paramv,int pn) {
+p_stekm          variable    496 S.ttyio.c        static char *b_stekm[MAXSTEK+1], **p_stekm = b_stekm;
+param            function    523 r.tele.c         int param(macro)
+pb               variable    161 r.main.c         struct savebuf pb,db;
+pcspaces         function   1106 r.edit.c         pcspaces(line,col,number,nl,flg)
+pcursor          function    297 S.ttyio.c        pcursor(col,lin)
+pf_wmac          variable    485 S.ttyio.c        int (*pf_wmac)();
+pick             function   1373 r.edit.c         struct fsd *pick(wksp,from,to)
+picklines        function   1074 r.edit.c         picklines(from,number)
+pickspaces       function   1095 r.edit.c         pickspaces(line,col,number,nl)
+plines           function   1221 r.edit.c         plines(buf,line)
+poscursor        function    275 r.tele.c         poscursor(col,lin)
+printfsd         function   1936 r.edit.c         printfsd(f,fd)
+ps_exin          variable    484 S.ttyio.c        char *ps_inmac, *ps_exin;
+ps_inmac         variable    484 S.ttyio.c        char *ps_inmac, *ps_exin;
+pspaces          function   1254 r.edit.c         pspaces(buf,line,col)
+pt_info          function    297 r.main.c         pt_info()
+ptff             function   1925 r.edit.c         ptff(f) struct fsd *f;
+ptflag           variable    131 r.mall.c         static ptflag=0;
+ptfree           function    132 r.mall.c         ptfree(fd)
+ptl              function   1918 r.edit.c         ptl(wf)
+ptr              member      105 r.mall.c         union store { union store *ptr;
+pttt             function    676 S.gettc.c        pttt()
+put              function   1208 r.edit.c         put(buf,line,col)
+put1c            function    251 r.hlam.c         put1c(c,fd)
+put1w            function    244 r.hlam.c         put1w(w,fd)
+putbks           function    795 r.edit.c         putbks(col,n)
+putblanks        function    441 S.ttyio.c        putblanks(k)
+putcbuf          variable    320 S.ttyio.c        char putcbuf[NPUTCBUF];
+putch            function    443 r.tele.c         putch(j,flg)
+putcha           function    329 S.ttyio.c        putcha(c)
+putchb           function    424 S.ttyio.c        putchb(c)
+putline          function   1554 r.edit.c         putline(nosave)
+read2            function    747 S.ttyio.c        read2()
+readch           function    528 S.ttyio.c        int readch()
+readfc           function    691 S.ttyio.c        readfc()
+redisplay        function    482 r.wind.c         redisplay(w,fn,from,to,delta,fromd)
+removeport       function    387 r.wind.c         removeport()
+rep_count        variable    133 r.cmd.c          int rep_count; /* Пока не используется, хотя и запоминается */
+rescreen         function    557 r.wind.c         rescreen(nom)int nom;
+rfile            variable     86 r.init.c         char *ttynm, *ttytmp, *rfile;
+right_parents    variable     19 r.lop.c          char *right_parents=")}]'`\"";
+rmacl            function    300 r.mac.c          char *rmacl(isy)
+run_shell        function    293 r.hlam.c         run_shell(cmd)
+s2i              function    182 r.hlam.c         char *s2i(s,i)
+s_delims         variable     26 r.lop.c          static SCALE s_delims[LSCALE(256)];
+s_parents        variable     20 r.lop.c          static SCALE s_parents[LSCALE(256)];
+salloc           function     75 r.hlam.c         char *salloc(n)
+savefile         function     61 r.file.c         savefile(file,n)
+sccsid           variable    145 r.main.c         static char *sccsid="@(#) RED / DEMOS-EC/SM $Header: r.main.c,v 4.20 90/05/22 23:22:10 alex Exp $";
+scroll           function    884 S.ttyio.c        scroll(n,bl)
+search           function    741 r.lop.c          search(delta)
+seek             function    263 r.hlam.c         seek(fd,shift,dsk)
+seit             variable    310 r.edit.c         static char *seit="\\\\\140'{(})|!~^";
+seit             variable    313 r.edit.c         static char *seit="\\\\\140'{(})|!^~";
+seit0            variable    314 r.edit.c         static char *seit0="\\\\";
+semiColon        variable    172 r.pars.c         static char semiColon[2];
+set_param        function    211 r.mac.c          set_param(nfile,line,col)
+setatr           function    469 S.ttyio.c        setatr(atr)
+setbusy          macro       102 r.mall.c         #define setbusy(p) (union store *)((INT)(p)|BUSY)
+setkeys          function    268 r.var.c          setkeys(keys)
+setscroll        function    985 S.ttyio.c        setscroll(viewp,begl)
+settab           function    169 r.tabs.c         char *settab(tabcol,arg)
+setupviewport    function    198 r.wind.c         setupviewport(ww,cl,cr,lt,lb,c)
+sgttyb           macro       116 S.ttyio.c        #define sgttyb termio
+sgttyb           macro       137 S.ttyio.c        #define sgttyb SGTTYB
+shiftview        function    821 r.tele.c         shiftview(n0,nl)
+showtabs         variable     47 r.var.c          int showtabs;
+sig              function    488 r.main.c         sig(n)
+splitline        function    979 r.edit.c         splitline(line,col)
+ss               variable    128 r.lop.c          static char *ess, *ss, *bss;
+startup          function    307 r.main.c         static startup(f)
+stc              variable    306 S.gettc.c        static char *stc;
+store            union       105 r.mall.c         union store { union store *ptr;
+strcopy          function    135 r.hlam.c         strcopy(a,b)
+stty             macro       114 S.ttyio.c        #define stty(des,fil) ioctl(des,TCSETA,fil)
+stty             macro       133 S.ttyio.c        #define stty(des,fil) ioctl(des,TIOCSETA,fil)
+switchfile       function    888 r.edit.c         switchfile(dir)
+switchport       function    183 r.wind.c         switchport(ww)
+switchpwksp      function    928 r.edit.c         switchpwksp()
+switchwksp       function    909 r.edit.c         switchwksp(make)
+tUTF8            function    157 r.lop.c          int tUTF8(int thiscol){ // Сколько Russian UTF8 символов в строке до позиции thiscol на экране
+tabstps          variable     12 r.tabs.c         SCALE tabstps[LSCALE(MAXTCOL)];
+tag              struct       67 r.mac.c          struct tag {int line, col, nfile;};
+tbuf             variable     56 S.termc.c        static char *tbuf;
+tchars0          variable    145 S.ttyio.c        struct tchars tchars0;
+tcread           function    450 S.gettc.c        tcread()
+tdecode          function    326 S.termc.c        tdecode(str, area)
+tellatr          variable    696 r.tele.c         static tellatr = A_INFO;
+telluser         function    725 r.tele.c         telluser(msg,col)
+temp2fsd         function    106 r.edit.c         struct fsd *temp2fsd(chan)
+templ            variable    143 S.ttyio.c        struct sgttyb templ;
+test             function    875 S.ttyio.c        test(s) char *s;
+testbusy         macro       101 r.mall.c         #define testbusy(p) ((INT)(p)&BUSY)
+testsig          function    521 r.main.c         testsig()
+tgetent          function     70 S.termc.c        tgetent(bp, name)
+tgetflag         function    276 S.termc.c        tgetflag(id)
+tgetnum          function    244 S.termc.c        tgetnum(id)
+tgetstr          function    302 S.termc.c        tgetstr(id, area)
+tgoto            function    413 S.termc.c        tgoto(CM, destcol, destline)
+tmpltc           variable    148 S.ttyio.c        static struct ltchars tmpltc,oldltc;
+tnamatch         function    200 S.termc.c        tnamatch(np)
+tnchktc          function    152 S.termc.c        tnchktc()
+to_home          function    241 r.wind.c         to_home(cp,port)
+tostop           function    275 r.hlam.c         tostop()
+toup             variable     79 S.gettc.c        char **toup= &UP; /* Так сложно из-за совпадения имен */
+tskip            function    226 S.termc.c        tskip(bp)
+ttcleanup        function    271 S.ttyio.c        ttcleanup()
+ttstartup        function    162 S.ttyio.c        ttstartup()
+ttyfile          variable    109 r.init.c         int ttyfile = -1;
+ttynm            variable     86 r.init.c         char *ttynm, *ttytmp, *rfile;
+ttytmp           variable     86 r.init.c         char *ttynm, *ttytmp, *rfile;
+undoedit         function   1607 r.edit.c         undoedit(f)
+unread1          function    679 S.ttyio.c        unread1(ch)
+unzoom           function    629 r.wind.c         unzoom(draw)
+use0flg          variable    115 r.cmd.c          char use0flg; /* используется для блокировки преобразования первого имени файла при "lcase" и "red - */
+video_mode       variable    156 S.ttyio.c        int video_mode; /* 0 - обычный режим, 1 - экранный режим */
+vilcasef         variable    155 S.ttyio.c        int vilcasef;
+wDleft           variable     33 r.lop.c          char *wDleft = "-1DI+1";/* */
+wDright          variable     34 r.lop.c          char *wDright= "+ID"; /* */
+wUTF8            function    169 r.lop.c          int wUTF8(int thiscol,int ulhccno){ // Сколько Russian UTF8 символов в строке до позиции thiscol в окне экрана
+w_left           variable     39 r.lop.c          char *w_left, *w_right;
+w_right          variable     39 r.lop.c          char *w_left, *w_right;
+werrflag         variable    166 r.main.c         int werrflag;
+werrsig          function    497 r.main.c         werrsig()
+wkspline         variable    810 r.edit.c         static struct workspace *wkspline;
+word_op          function    348 r.lop.c          word_op(p_l, p_c, op,arg)
+wposit           function    854 r.edit.c         wposit(wk,lno)
+writefile        function    766 S.ttyio.c        writefile(code1,str,code2)
+writemp          function   1488 r.edit.c         struct fsd *writemp(buf,n)
+wseek            function    818 r.edit.c         int wseek(wksp,lno)
+zoom_w           function    600 r.wind.c         zoom_w(back)
