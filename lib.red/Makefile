@@ -1,74 +1,74 @@
 #
 #
-# âÉÂÌÉÏÔÅËÁ ÒÅÄÁËÔÏÒÁ red - ÓÐÒÁ×ÏÞÎÙÅ ÆÁÊÌÙ É ÔÁÂÌÉÃÙ
-# ÷ÓÅÍ ÜÔÉÍ ËÏÍÐÏÎÅÎÔÁÍ ÍÅÓÔÏ × /usr/local/lib/red
+# Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ° Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ð° red - ÑÐ¿Ñ€Ð°Ð²Ð¾Ñ‡Ð½Ñ‹Ðµ Ñ„Ð°Ð¹Ð»Ñ‹ Ð¸ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ‹
+# Ð’ÑÐµÐ¼ ÑÑ‚Ð¸Ð¼ ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ð°Ð¼ Ð¼ÐµÑÑ‚Ð¾ Ð² /usr/local/lib/red
 # termcap -> /usr/local/etc
 #
-# úÄÅÓØ ÓÏÄÅÒÖÁÔÓÑ ÆÁÊÌÙ ÔÒÅÈ ÔÉÐÏ×
-# 1. ôÁÂÌÉÃÙ ËÏÄÉÒÏ×ËÉ (ÔÒÁÎÓÌÉÒÕÀÔÓÑ É ÚÁÐÕÓËÁÀÔÓÑ).
-# 2. æÁÊÌÙ ÉÎÉÃÉÁÌÉÚÁÃÉÉ ÒÅÄÁËÔÏÒÁ
-# 3. óÐÒÁ×ÏÞÎÙÅ ÆÁÊÌÙ
-# ëÒÏÍÅ ÔÏÇÏ, ÓÏÄÅÒÖÉÔÓÑ ÆÁÊÌ termcap.
+# Ð—Ð´ÐµÑÑŒ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑÑ Ñ„Ð°Ð¹Ð»Ñ‹ Ñ‚Ñ€ÐµÑ… Ñ‚Ð¸Ð¿Ð¾Ð²
+# 1. Ð¢Ð°Ð±Ð»Ð¸Ñ†Ñ‹ ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐ¸ (Ñ‚Ñ€Ð°Ð½ÑÐ»Ð¸Ñ€ÑƒÑŽÑ‚ÑÑ Ð¸ Ð·Ð°Ð¿ÑƒÑÐºÐ°ÑŽÑ‚ÑÑ).
+# 2. Ð¤Ð°Ð¹Ð»Ñ‹ Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ð°
+# 3. Ð¡Ð¿Ñ€Ð°Ð²Ð¾Ñ‡Ð½Ñ‹Ðµ Ñ„Ð°Ð¹Ð»Ñ‹
+# ÐšÑ€Ð¾Ð¼Ðµ Ñ‚Ð¾Ð³Ð¾, ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ÑÑ Ñ„Ð°Ð¹Ð» termcap.
 #
 ALL =$(CYRTABS) $(INITABS) $(HELP)
 HELP=help.*
 INITABS=init.dflt init.xterm  init.xa
 CYRTABS=Wyse75 VT200 PVT100 QWERTY8 alt alt-alt
 DSTDIR=/usr/local
-DSTDIR=${Z_LIB}
-DSTCPU=cpux8
+DSTCPU=re
 
 all:  $(ALL)
 
 
 Wyse75:  Wyse75.c
 	cc Wyse75.c
-	a.out > Wyse75
+	./a.out > Wyse75
 	rm -f a.out
 
 PVT100:PVT100.c
 	cc PVT100.c
-	a.out > PVT100
+	./a.out > PVT100
 	rm -f a.out
 
 QWERTY8:  QWERTY8.c
 	cc QWERTY8.c
-	a.out > QWERTY8
+	./a.out > QWERTY8
 	rm -f a.out
 
 
 alt-alt: alt-alt.c
 	cc alt-alt.c
-	a.out > alt-alt
+	./a.out > alt-alt
 	rm -f a.out
 
 
 alt: alt.c
 	cc alt.c
-	a.out > alt
+	./a.out > alt
 	rm -f a.out
 
 
 lin:    lin.c
 	cc lin.c
-	a.out > lin
+	./a.out > lin
 	rm -f a.out
 
 
 VT200:  VT200.c
 	cc VT200.c
-	a.out > VT200
+	./a.out > VT200
 	rm -f a.out
 
 install: all init.dflt.W help.dflt.W
-	rpl '$$DSTDIR' ${DSTDIR} <help.dflt.W >help.dflt
-	rpl '$$DSTDIR' ${DSTDIR} <init.dflt.W >init.dflt
-	-mkdir -p $(DSTDIR)/red
-	cp $(ALL) $(DSTDIR)/red
-	       for i in $(INITABS);do mv $(DSTDIR)/red/$$i $(DSTDIR)/red/$${i}src;sh comm_remove < $$i > $(DSTDIR)/red/$$i;done
-	-mkdir -p $(DSTDIR)/fonts
-	cp fontVT200 $(DSTDIR)/fonts/vt200
-	echo "Join 'termcap' and you '/usr/local/etc/termcap' OR '/etc/termcap'"
+	sudo rpl '$$DSTDIR' ${DSTDIR} <help.dflt.W >help.dflt
+	sudo rpl '$$DSTDIR' ${DSTDIR} <init.dflt.W >init.dflt
+	sudo mkdir -p $(DSTDIR)/red
+	sudo cp $(ALL) $(DSTDIR)/red
+#               for i in $(INITABS);do mv $(DSTDIR)/red/$$i $(DSTDIR)/red/$${i}src;sh comm_remove < $$i > $(DSTDIR)/red/$$i;done
+#        -mkdir -p $(DSTDIR)/fonts
+#        cp fontVT200 $(DSTDIR)/fonts/vt200
+#        echo "Join 'termcap' and you '/usr/local/etc/termcap' OR '/etc/termcap'"
+	 sudo tic xterm-256color.infocmp
 
 rinstall: all
 	-rsh $(DSTCPU) mkdir $(DSTDIR)/lib/red
