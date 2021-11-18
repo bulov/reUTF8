@@ -12,7 +12,7 @@
 #
 ALL =$(CYRTABS) $(INITABS) $(HELP)
 HELP=help.*
-INITABS=init.dflt init.xterm  init.xa
+INITABS=init.dflt init.xterm  init.xa init.xterm-256color
 CYRTABS=Wyse75 VT200 PVT100 QWERTY8 alt alt-alt
 DSTDIR=/usr/local
 DSTCPU=re
