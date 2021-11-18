@@ -61,11 +61,11 @@
 
 /* Путь поиска файлов инициализации */
 # ifndef INIT_PATH
-#  define    INIT_PATH "/usr/local/lib/red/init.%t:%h/.redi.%t:%h/.redi.dflt:/usr/local/lib/red/init%k.%t:/usr/local/lib/red/init%k.dflt"
+#  define    INIT_PATH "/usr/local/red/init.%t:%h/.redi.%t:%h/.redi.dflt:/usr/local/red/init%k.%t:/usr/local/red/init%k.dflt"
 # endif
 /* Путь поиска файлов справки */
 # ifndef HELP_PATH
-#  define    HELP_PATH "%h/.redh.%t:%h/.redh.dflt:/usr/local/lib/red/help%k.%t:/usr/local/lib/red/help%k.dflt"
+#  define    HELP_PATH "%h/.redh.%t:%h/.redh.dflt:/usr/local/red/help%k.%t:/usr/local/red/help%k.dflt"
 # endif
 # ifndef MACRO_PATH
 #  define    MACRO_PATH "%h/.redmacro"
@@ -96,7 +96,7 @@ int defrport  = 30;                /* RIGHT PORT */
 int definsert  = 1;                /* OPEN       */
 int defdelete  = 1;                /* CLOSE      */
 int defpick    = 1;                /* PICK       */
-char *deffile /* = "/usr/local/lib/red/help.DFLT" */ ;   /* Файл подсказок */
+char *deffile /* = "/usr/local/red/help.DFLT" */ ;   /* Файл подсказок */
 int defedit    = 2;                /* Умолчания для границы сдвига экрана */
 
 /* Инициализации  */

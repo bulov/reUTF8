@@ -38,7 +38,6 @@ OBJ=$(OBJS) $(OBJC)
 
 DSTDIR=/usr/local
 DSTBIN=/usr/local/bin
-DSTDIR=/usr/local/lib
 DSTCPU=re
 DSTNAME=re
 RED=edit
@@ -226,7 +225,7 @@ install: $(RED) edit lib.red rpl
 	-sudo strip $(RED)
 	 sudo cp $(RED) ${DSTBIN}/$(DSTNAME)
 	 sudo chmod 7711 ${DSTBIN}/$(DSTNAME)
-	 cd lib.red; $(MAKE) DSTLIB=$(DSTDIR) install
+	 cd lib.red; $(MAKE) DSTDIR=$(DSTDIR) install
 	 sudo mkdir /var/tmp/ret{m,t} ; sudo chmod 07777 /var/tmp/ret{m,t}
 
 rinstall: edit red.lib/re.std red.lib/help.* rpl
