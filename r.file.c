@@ -277,6 +277,7 @@ int *line, *col;
  * Код ответа -1, если файл не открыли и не создали.
  * Если putflg равен 1, файл тут же выводится в окно.
  */
+#include <sys/stat.h>
 editfile(file,line,col,mkflg,puflg)
 char *file;
 int line, col, mkflg, puflg;
@@ -286,7 +287,10 @@ int line, col, mkflg, puflg;
     register char *c,*d;
     int lread1;
     int linecursor;
-    editfileLineCol(file,&line,&col);
+    struct stat statbuf;
+    line=col=0;
+    if ( 0 != stat(file,&statbuf))                 /* Файл существует? */
+	   editfileLineCol(file,&line,&col);
     /* Сбросим все изменения */
     putline(1);
     fn = -1;
