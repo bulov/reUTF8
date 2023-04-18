@@ -25,9 +25,6 @@
  * Revision 3.4  86/09/19  19:52:46  alex
  * Версия для СМ-1700
  * 
- * Revision 3.3  86/08/04  20:51:42  alex
- * Bepqh dk LMNQ/DELNQ 2
- * 
  * Revision 3.2  86/07/24  00:24:13  alex
  * Об'единены версии текстов для ЕС и СМ
  * 
@@ -249,23 +246,37 @@ int nl, newf;
 /* на file line col
 */
 
-editfileLineCol(file,line,col)
+#include <sys/stat.h>
+editfileLineCol(file,line,col)          // Разбор ситуации file:Name:Line:Col
 char *file;
 int *line, *col;
 {
    char *pf;
-   int key=0;
+   int kC,kL;
+   struct stat statbuf;
 
-   for  ( pf=file ; *pf != 0; pf++) {
+   if ( 0 == stat(file,&statbuf))                 /* Файл существует? */
+       return;
+   kC=kL=0;
+   for  ( pf=file; *pf != NULL; pf++);
+   for  ( ; *pf != file; pf--) {
        if ( ':' == *pf ){
 	   *pf = 0;
-	    pf = s2i(pf+1,line);
-	    if ( 0 != *line ) *line -= 1;
-	    if ( NULL == pf )  break;
-	    s2i(pf+1,col);
-	    break;
+	   if ( 0 == kC++ ){
+	       s2i(pf+1,col);
+	   }
+	   if ( 1 >= kL++ ){
+	       s2i(pf+1,line);
+	       *line -= 1;
+	   }
+	   if ( 0 == stat(file,&statbuf))                 /* Файл существует? */
+	       break;
        }
+       if ( 2 == kL )
+	   break;
    }
+   if ( 1 == kL )                  // Разбор ситуации file:Name:Line
+       *col=0;
 }
 /*
  * editfile(file,line,col,mkflg,puflg) -
@@ -277,7 +288,6 @@ int *line, *col;
  * Код ответа -1, если файл не открыли и не создали.
  * Если putflg равен 1, файл тут же выводится в окно.
  */
-#include <sys/stat.h>
 editfile(file,line,col,mkflg,puflg)
 char *file;
 int line, col, mkflg, puflg;
@@ -287,10 +297,7 @@ int line, col, mkflg, puflg;
     register char *c,*d;
     int lread1;
     int linecursor;
-    struct stat statbuf;
-    line=col=0;
-    if ( 0 != stat(file,&statbuf))                 /* Файл существует? */
-	   editfileLineCol(file,&line,&col);
+    editfileLineCol(file,&line,&col);
     /* Сбросим все изменения */
     putline(1);
     fn = -1;
