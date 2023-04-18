@@ -264,18 +264,19 @@ int *line, *col;
 	   *pf = 0;
 	   if ( 0 == kC++ ){
 	       s2i(pf+1,col);
-	   }
-	   if ( 1 >= kL++ ){
+	       *line = *col -1;
+	   }else{
+	       kL++;
 	       s2i(pf+1,line);
-	       *line -= 1;
+//               if ( 0 != *line )
+		   *line -= 1;
+	       break;
 	   }
 	   if ( 0 == stat(file,&statbuf))                 /* Файл существует? */
 	       break;
        }
-       if ( 2 == kL )
-	   break;
    }
-   if ( 1 == kL )                  // Разбор ситуации file:Name:Line
+   if ( 0 == kL )                  // Разбор ситуации file:Name:Line
        *col=0;
 }
 /*
