@@ -259,7 +259,7 @@ int *line, *col;
        return;
    kC=kL=0;
    for  ( pf=file; *pf != NULL; pf++);
-   for  ( ; *pf != file; pf--) {
+   for  ( pf--; pf != file && (( '0' <= *pf && *pf <= '9' ) || ':' == *pf ) ; pf--) {
        if ( ':' == *pf ){
 	   *pf = 0;
 	   if ( 0 == kC++ ){
@@ -268,8 +268,7 @@ int *line, *col;
 	   }else{
 	       kL++;
 	       s2i(pf+1,line);
-//               if ( 0 != *line )
-		   *line -= 1;
+	       *line -= 1;
 	       break;
 	   }
 	   if ( 0 == stat(file,&statbuf))                 /* Файл существует? */
